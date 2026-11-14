@@ -1,10 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Fragment } from 'react';
 import { useParams, useSearchParams, Link, Navigate } from 'react-router-dom';
 import storiesData from '../data/stories.json';
 import ChapterBlock from '../components/ChapterBlock';
 import Timeline from '../components/Timeline';
 import ThenNow from '../components/ThenNow';
 import DustStormChart from '../components/DustStormChart';
+import ChartErrorBoundary from '../components/ChartErrorBoundary';
+import { fetchAndParseDustStormData } from '../lib/parseCsv';
 
 export default function Story() {
   const { id } = useParams();
@@ -13,33 +15,44 @@ export default function Story() {
 
   const story = storiesData.find((s) => s.id === id);
   const [activeChapter, setActiveChapter] = useState(0);
+  const [dustData, setDustData] = useState([]);
+  const [dustLoading, setDustLoading] = useState(false);
+  const [dustError, setDustError] = useState(null);
+
+  // Fetch dust data if Opportunity
+  useEffect(() => {
+    if (id === 'opportunity') {
+      setDustLoading(true);
+      fetchAndParseDustStormData()
+        .then((data) => {
+          setDustData(data);
+          setDustLoading(false);
+        })
+        .catch((err) => {
+          setDustError(err?.message || 'Could not load NASA dust storm data.');
+          setDustLoading(false);
+        });
+    }
+  }, [id]);
 
   // Scroll spy for current chapter
   useEffect(() => {
     if (!story) return;
-
     const observers = [];
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
     story.chapters.forEach((_, idx) => {
       const el = document.getElementById(`chapter-${idx}`);
       if (!el) return;
-
       const observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              setActiveChapter(idx);
-            }
+            if (entry.isIntersecting) setActiveChapter(idx);
           });
         },
         { rootMargin: '-20% 0px -60% 0px', threshold: 0.1 }
       );
-
       observer.observe(el);
       observers.push(observer);
     });
-
     return () => observers.forEach((obs) => obs.disconnect());
   }, [story]);
 
@@ -51,14 +64,13 @@ export default function Story() {
     setActiveChapter(idx);
     const el = document.getElementById(`chapter-${idx}`);
     if (el) {
-      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      el.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      el.scrollIntoView({ behavior: prefersReduced ? 'auto' : 'smooth' });
     }
   };
 
   return (
     <div className="star-field min-h-screen text-slate-100 flex flex-col">
-      {/* Top Navbar */}
       <header className="w-full border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-sm sticky top-0 z-30">
         <div className="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
           <Link
@@ -75,16 +87,13 @@ export default function Story() {
         </div>
       </header>
 
-      {/* Sticky Timeline Bar */}
       <Timeline
         chapters={story.chapters}
         activeChapter={activeChapter}
         onSelectChapter={handleSelectChapter}
       />
 
-      {/* Main Story Container */}
       <main className="flex-1 max-w-4xl mx-auto w-full px-4 py-8 sm:py-12 space-y-10 sm:space-y-12">
-        {/* Story Header */}
         <section className="text-center max-w-2xl mx-auto">
           <div className="inline-flex items-center gap-2 px-3 py-1 mb-3 rounded-full bg-slate-900 border border-slate-700 text-xs sm:text-sm font-medium text-slate-300">
             <span>{story.planet}</span>
@@ -99,26 +108,30 @@ export default function Story() {
           </p>
         </section>
 
-        {/* Chapter Blocks */}
+        {/* Chapter Blocks with DustStormChart right after the storm chapter */}
         <section aria-label="Story chapters" className="space-y-8">
           {story.chapters.map((chapter, idx) => (
-            <ChapterBlock
-              key={chapter.title || idx}
-              chapter={chapter}
-              index={idx}
-              id={`chapter-${idx}`}
-            />
+            <Fragment key={chapter.title || idx}>
+              <ChapterBlock
+                chapter={chapter}
+                index={idx}
+                id={`chapter-${idx}`}
+              />
+              {story.id === 'opportunity' && idx === 3 && (
+                <div id="opportunity-chart" className="pt-2">
+                  <ChartErrorBoundary>
+                    <DustStormChart
+                      data={dustData}
+                      loading={dustLoading}
+                      error={dustError}
+                    />
+                  </ChartErrorBoundary>
+                </div>
+              )}
+            </Fragment>
           ))}
         </section>
 
-        {/* Opportunity Specific Chart Placeholder */}
-        {story.id === 'opportunity' && (
-          <section id="opportunity-chart">
-            <DustStormChart />
-          </section>
-        )}
-
-        {/* Then vs Now */}
         <section aria-label="Planned vs Actual Lifespan">
           <ThenNow
             plannedLifespan={story.plannedLifespan}
@@ -127,7 +140,6 @@ export default function Story() {
           />
         </section>
 
-        {/* Why It Matters Card */}
         <section className="p-6 sm:p-8 rounded-2xl bg-indigo-950/40 border border-indigo-900/60 shadow-xl">
           <span className="text-xs font-bold uppercase tracking-wider text-indigo-400 block mb-2">
             Big Picture
@@ -140,7 +152,6 @@ export default function Story() {
           </p>
         </section>
 
-        {/* Debug Panel: only shown when ?debug=1 */}
         {isDebug && story.verifyNotes && (
           <aside
             aria-label="Debug Verification Notes"
@@ -160,7 +171,6 @@ export default function Story() {
           </aside>
         )}
 
-        {/* Story Navigation Footer */}
         <nav className="pt-6 border-t border-slate-800 flex flex-wrap justify-between gap-4 text-sm font-semibold">
           <Link
             to="/"
