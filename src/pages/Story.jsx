@@ -1,7 +1,183 @@
+import { useState, useEffect } from 'react';
+import { useParams, useSearchParams, Link, Navigate } from 'react-router-dom';
+import storiesData from '../data/stories.json';
+import ChapterBlock from '../components/ChapterBlock';
+import Timeline from '../components/Timeline';
+import ThenNow from '../components/ThenNow';
+import DustStormChart from '../components/DustStormChart';
+
 export default function Story() {
+  const { id } = useParams();
+  const [searchParams] = useSearchParams();
+  const isDebug = searchParams.get('debug') === '1';
+
+  const story = storiesData.find((s) => s.id === id);
+  const [activeChapter, setActiveChapter] = useState(0);
+
+  // Scroll spy for current chapter
+  useEffect(() => {
+    if (!story) return;
+
+    const observers = [];
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    story.chapters.forEach((_, idx) => {
+      const el = document.getElementById(`chapter-${idx}`);
+      if (!el) return;
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              setActiveChapter(idx);
+            }
+          });
+        },
+        { rootMargin: '-20% 0px -60% 0px', threshold: 0.1 }
+      );
+
+      observer.observe(el);
+      observers.push(observer);
+    });
+
+    return () => observers.forEach((obs) => obs.disconnect());
+  }, [story]);
+
+  if (!story) {
+    return <Navigate to="/404" replace />;
+  }
+
+  const handleSelectChapter = (idx) => {
+    setActiveChapter(idx);
+    const el = document.getElementById(`chapter-${idx}`);
+    if (el) {
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      el.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+    }
+  };
+
   return (
-    <div className="p-8">
-      <h1 className="text-2xl font-bold">Story</h1>
+    <div className="star-field min-h-screen text-slate-100 flex flex-col">
+      {/* Top Navbar */}
+      <header className="w-full border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-sm sticky top-0 z-30">
+        <div className="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
+          <Link
+            to="/"
+            className="text-sm sm:text-base font-bold text-sky-400 hover:text-sky-300 transition-colors flex items-center gap-1.5 focus:outline-none focus:underline"
+          >
+            &larr; Back to all stories
+          </Link>
+          <div className="flex items-center gap-4 text-xs sm:text-sm font-semibold text-slate-300">
+            <Link to="/compare" className="hover:text-white">Compare</Link>
+            <Link to="/quiz" className="hover:text-white">Quiz</Link>
+            <Link to="/sources" className="hover:text-white">Sources</Link>
+          </div>
+        </div>
+      </header>
+
+      {/* Sticky Timeline Bar */}
+      <Timeline
+        chapters={story.chapters}
+        activeChapter={activeChapter}
+        onSelectChapter={handleSelectChapter}
+      />
+
+      {/* Main Story Container */}
+      <main className="flex-1 max-w-4xl mx-auto w-full px-4 py-8 sm:py-12 space-y-10 sm:space-y-12">
+        {/* Story Header */}
+        <section className="text-center max-w-2xl mx-auto">
+          <div className="inline-flex items-center gap-2 px-3 py-1 mb-3 rounded-full bg-slate-900 border border-slate-700 text-xs sm:text-sm font-medium text-slate-300">
+            <span>{story.planet}</span>
+            <span>&bull;</span>
+            <span>{story.mission}</span>
+          </div>
+          <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight mb-4">
+            {story.name}
+          </h1>
+          <p className="text-lg sm:text-xl text-sky-200 font-medium italic">
+            &ldquo;{story.hook}&rdquo;
+          </p>
+        </section>
+
+        {/* Chapter Blocks */}
+        <section aria-label="Story chapters" className="space-y-8">
+          {story.chapters.map((chapter, idx) => (
+            <ChapterBlock
+              key={chapter.title || idx}
+              chapter={chapter}
+              index={idx}
+              id={`chapter-${idx}`}
+            />
+          ))}
+        </section>
+
+        {/* Opportunity Specific Chart Placeholder */}
+        {story.id === 'opportunity' && (
+          <section id="opportunity-chart">
+            <DustStormChart />
+          </section>
+        )}
+
+        {/* Then vs Now */}
+        <section aria-label="Planned vs Actual Lifespan">
+          <ThenNow
+            plannedLifespan={story.plannedLifespan}
+            actualLifespan={story.actualLifespan}
+            endEvent={story.endEvent}
+          />
+        </section>
+
+        {/* Why It Matters Card */}
+        <section className="p-6 sm:p-8 rounded-2xl bg-indigo-950/40 border border-indigo-900/60 shadow-xl">
+          <span className="text-xs font-bold uppercase tracking-wider text-indigo-400 block mb-2">
+            Big Picture
+          </span>
+          <h3 className="text-xl sm:text-2xl font-bold text-white mb-3">
+            Why it matters
+          </h3>
+          <p className="text-base sm:text-lg text-indigo-100 leading-relaxed font-normal">
+            {story.whyItMatters}
+          </p>
+        </section>
+
+        {/* Debug Panel: only shown when ?debug=1 */}
+        {isDebug && story.verifyNotes && (
+          <aside
+            aria-label="Debug Verification Notes"
+            className="p-4 rounded-xl bg-amber-950/60 border border-amber-600/80 text-amber-200 text-xs space-y-2"
+          >
+            <div className="flex items-center gap-2 font-bold uppercase tracking-wider text-amber-400">
+              <svg className="w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+              </svg>
+              Debug Mode: Verification Notes
+            </div>
+            <ul className="list-disc pl-5 space-y-1">
+              {story.verifyNotes.map((note, i) => (
+                <li key={i}>{note}</li>
+              ))}
+            </ul>
+          </aside>
+        )}
+
+        {/* Story Navigation Footer */}
+        <nav className="pt-6 border-t border-slate-800 flex flex-wrap justify-between gap-4 text-sm font-semibold">
+          <Link
+            to="/"
+            className="text-slate-400 hover:text-white transition-colors"
+          >
+            &larr; Back to all machines
+          </Link>
+          <div className="flex gap-4">
+            <Link to="/compare" className="text-sky-400 hover:text-sky-300">
+              Compare machines &rarr;
+            </Link>
+            <Link to="/quiz" className="text-sky-400 hover:text-sky-300">
+              Take Quiz &rarr;
+            </Link>
+          </div>
+        </nav>
+      </main>
     </div>
   );
 }
