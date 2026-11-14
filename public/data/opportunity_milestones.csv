@@ -1,0 +1,8 @@
+sol,date,solar_energy_wh,tau,tau_estimated,note
+4970,2018-01-16,525,0.460,false,"Winter. Dust cleaning event just helped the panels."
+4984,2018-01-30,665,0.427,false,"Panels cleaner, energy improving."
+4991,2018-02-06,628,0.424,false,"Clear sky before the storm. Dust factor 0.829."
+5105,2018-06-03,468,1.0,true,"Tau reported as 'around 1.0'. Storm approaching."
+5106,2018-06-04,345,2.1,false,"Low-power plan in effect."
+5107,2018-06-06,133,3.0,true,"Tau not measured; JPL estimated above 3.0."
+5111,2018-06-10,22,10.8,false,"Last contact. JPL final report: 22 Wh, tau 10.8 (highest ever measured on Mars). NASA's early graphic said 21 Wh and 10.5; use 22 / 10.8."
