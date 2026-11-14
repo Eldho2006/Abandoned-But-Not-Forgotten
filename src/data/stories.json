@@ -1,1 +1,191 @@
-[]
+[
+  {
+    "id": "opportunity",
+    "name": "Opportunity",
+    "mission": "Mars Exploration Rovers",
+    "planet": "Mars",
+    "launchDate": "July 7, 2003 (US time) / July 8, 2003 (UTC)",
+    "landingDate": "January 24, 2004 (US time) / January 25, 2004 (UTC)",
+    "plannedLifespan": "90 sols",
+    "actualLifespan": "sol 5,111 (about 14 years)",
+    "endEvent": "Last message received on June 10, 2018 (sol 5,111) during a giant dust storm; mission declared complete on February 13, 2019",
+    "hook": "Built for 90 days. Last heard from on sol 5,111.",
+    "chapters": [
+      {
+        "title": "Built for 90 days",
+        "text": "Opportunity launched on July 7, 2003 and landed on Mars on January 24, 2004 (US time), on a flat plain called Meridiani Planum. Scientists picked it because orbiters had spotted a mineral there, hematite, that usually forms in water. NASA planned for it to work for 90 Martian days, called sols. Its twin, Spirit, had landed three weeks earlier.",
+        "image": null, "imageAlt": null, "imageCredit": null
+      },
+      {
+        "title": "Following the water",
+        "text": "Opportunity found tiny gray spheres nicknamed \"blueberries\" and layered rocks. These clues told scientists that liquid water once soaked this part of Mars. NASA says the twin rovers confirmed that water was long-standing on Mars in ancient times.",
+        "image": null, "imageAlt": null, "imageCredit": null
+      },
+      {
+        "title": "It kept going",
+        "text": "Ninety sols passed. Then years. Opportunity drove across plains and explored huge craters, travelling 45.16 kilometers (28.06 miles) in total, a record for any rover that stood for years. Sometimes wind blew dust off its solar panels and gave it fresh power.",
+        "image": null, "imageAlt": null, "imageCredit": null
+      },
+      {
+        "title": "The storm",
+        "text": "Opportunity had survived a big dust storm in 2007, so the team hoped it would again. In June 2018 a giant dust storm grew over Mars. In February Opportunity made 628 watt-hours of energy in a day. By June 10 it made just 22. The dust was blocking almost all the sunlight.",
+        "image": null, "imageAlt": null, "imageCredit": null
+      },
+      {
+        "title": "Silence",
+        "text": "Opportunity's last message came on June 10, 2018, sol 5,111. The team kept sending recovery signals for months, more than 1,000 of them. On February 13, 2019, NASA declared the mission complete.",
+        "image": null, "imageAlt": null, "imageCredit": null
+      }
+    ],
+    "whyItMatters": "Solar power is great, but dust can starve it. Engineers think about this when they design power systems for future Mars missions.",
+    "sources": [
+      { "label": "NASA Spirit and Opportunity", "url": "https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/" }
+    ],
+    "quiz": [
+      {
+        "q": "How long was Opportunity planned to work on Mars?",
+        "options": ["90 sols", "1 sol", "14 years", "5,111 sols"],
+        "answerIndex": 0,
+        "explanation": "NASA originally planned for Opportunity to work for 90 Martian days, called sols."
+      },
+      {
+        "q": "What blocked Opportunity's sunlight in 2018?",
+        "options": ["A solar eclipse", "A giant dust storm", "A broken camera", "A Martian mountain"],
+        "answerIndex": 1,
+        "explanation": "In June 2018, a giant dust storm covered Mars and blocked almost all sunlight from reaching Opportunity's solar panels."
+      }
+    ],
+    "verifyNotes": [
+      "VERIFY the 'blueberries' detail",
+      "VERIFY on NASA 2007 press release",
+      "VERIFY on NASA page: team sending recovery signals for months, more than 1,000 of them",
+      "VERIFY mission declared complete on February 13, 2019"
+    ]
+  },
+  {
+    "id": "apollo11-eagle",
+    "name": "Apollo 11 Eagle",
+    "mission": "Apollo 11",
+    "planet": "Moon",
+    "launchDate": "July 16, 1969",
+    "landingDate": "July 20, 1969",
+    "plannedLifespan": null,
+    "actualLifespan": "Landed July 20, 1969; descent stage remains on the Moon",
+    "endEvent": "Descent stage left on the Moon as a launch pad when the ascent stage lifted off",
+    "hook": "The machine that stayed behind",
+    "chapters": [
+      {
+        "title": "A ride to the Moon",
+        "text": "Apollo 11 launched on July 16, 1969. Astronauts Neil Armstrong and Buzz Aldrin flew a lander named Eagle down to the Sea of Tranquility. Michael Collins stayed in orbit in the command module, Columbia. The landing was on July 20.",
+        "image": null, "imageAlt": null, "imageCredit": null
+      },
+      {
+        "title": "Two machines in one",
+        "text": "Eagle had two parts. The bottom part, the descent stage, had the landing engine, legs and storage. The top part, the ascent stage, held the crew cabin and the engine for going home.",
+        "image": null, "imageAlt": null, "imageCredit": null
+      },
+      {
+        "title": "Leaving it behind",
+        "text": "To lift off, the astronauts used the descent stage as a launch pad. The ascent stage flew back up to meet Columbia. The descent stage stayed on the Moon, along with a plaque and science equipment.",
+        "image": null, "imageAlt": null, "imageCredit": null
+      },
+      {
+        "title": "Still useful",
+        "text": "The astronauts placed a laser reflector on the surface. Scientists still bounce laser beams off reflectors left by Apollo missions to measure the distance to the Moon.",
+        "image": null, "imageAlt": null, "imageCredit": null
+      },
+      {
+        "title": "Seen from space",
+        "text": "NASA's Lunar Reconnaissance Orbiter has photographed the landing site. The pictures show the descent stage and the trails the astronauts walked.",
+        "image": null, "imageAlt": null, "imageCredit": null
+      }
+    ],
+    "whyItMatters": "Parts of a mission are designed to be left behind. Future crews will plan landers, and even their leftovers, with the Moon's history in mind.",
+    "sources": [
+      { "label": "NASA Apollo 11", "url": "https://www.nasa.gov/mission/apollo-11/" }
+    ],
+    "quiz": [
+      {
+        "q": "Which part of Eagle stayed on the Moon?",
+        "options": ["The descent stage", "The ascent stage", "The command module Columbia", "The entire lander"],
+        "answerIndex": 0,
+        "explanation": "The astronauts used the descent stage as a launch pad to lift off, leaving it behind on the Moon."
+      },
+      {
+        "q": "What instrument left on the Moon by Apollo missions allows scientists to measure distance with laser beams?",
+        "options": ["A laser reflector", "A solar telescope", "A radar dish", "A weather station"],
+        "answerIndex": 0,
+        "explanation": "Scientists still bounce laser beams off reflectors left on the lunar surface by Apollo missions to measure the distance to the Moon."
+      }
+    ],
+    "verifyNotes": [
+      "VERIFY plaque wording if you quote it",
+      "VERIFY that Apollo 11's own reflector is still in use",
+      "VERIFY image ID and credit on NASA LROC page"
+    ]
+  },
+  {
+    "id": "sojourner",
+    "name": "Sojourner",
+    "mission": "Mars Pathfinder",
+    "planet": "Mars",
+    "launchDate": "December 4, 1996",
+    "landingDate": "July 4, 1997",
+    "plannedLifespan": "about 7 sols",
+    "actualLifespan": "about 83 sols",
+    "endEvent": "Last signal received on September 27, 1997; engineers think the lander battery may have failed",
+    "hook": "The little rover that proved it could",
+    "chapters": [
+      {
+        "title": "Tiny and brave",
+        "text": "Sojourner was about the size of a microwave oven and weighed roughly 10.5 kilograms (23 pounds). It rode to Mars on the Pathfinder lander, which landed on July 4, 1997.",
+        "image": null, "imageAlt": null, "imageCredit": null
+      },
+      {
+        "title": "First wheels on Mars",
+        "text": "Sojourner was the first rover to drive on Mars. It rolled off the lander and inspected nearby rocks, including ones nicknamed Barnacle Bill and Yogi.",
+        "image": null, "imageAlt": null, "imageCredit": null
+      },
+      {
+        "title": "A science lab on wheels",
+        "text": "It carried an instrument called APXS that measured which elements are in rocks and soil. The team could test rocks without sending any people.",
+        "image": null, "imageAlt": null, "imageCredit": null
+      },
+      {
+        "title": "Beyond the plan",
+        "text": "NASA planned for about 7 sols. Sojourner and Pathfinder kept working for about 83 sols. Their last signal arrived on September 27, 1997.",
+        "image": null, "imageAlt": null, "imageCredit": null
+      },
+      {
+        "title": "Quiet at last",
+        "text": "Engineers think the lander's battery may have failed. Sojourner never got to drive again, but it proved that small rovers work on Mars.",
+        "image": null, "imageAlt": null, "imageCredit": null
+      }
+    ],
+    "whyItMatters": "Sojourner showed that a rover could survive and do science on Mars. That helped lead to Spirit, Opportunity, Curiosity and Perseverance.",
+    "sources": [
+      { "label": "NASA Mars Pathfinder", "url": "https://science.nasa.gov/mission/mars-pathfinder/" }
+    ],
+    "quiz": [
+      {
+        "q": "Which rover was the first to drive on Mars?",
+        "options": ["Sojourner", "Curiosity", "Perseverance", "Spirit"],
+        "answerIndex": 0,
+        "explanation": "Sojourner was the first rover to drive on Mars when it rolled off the Pathfinder lander in 1997."
+      },
+      {
+        "q": "What did Sojourner's APXS instrument measure?",
+        "options": ["Which elements are in rocks and soil", "The temperature of the atmosphere", "The speed of the wind", "Radio signals from Earth"],
+        "answerIndex": 0,
+        "explanation": "Sojourner's APXS instrument measured which elements are in rocks and soil without sending people."
+      }
+    ],
+    "verifyNotes": [
+      "VERIFY landing date July 4, 1997",
+      "VERIFY actual lifespan about 83 sols",
+      "VERIFY rock nicknames Barnacle Bill and Yogi",
+      "VERIFY last signal September 27, 1997",
+      "VERIFY wording: engineers think the lander's battery may have failed"
+    ]
+  }
+]
