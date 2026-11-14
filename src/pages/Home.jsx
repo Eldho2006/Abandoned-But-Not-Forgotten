@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import StoryCard from '../components/StoryCard';
+import HeroPlanet from '../components/3d/HeroPlanet';
 import storiesData from '../data/stories.json';
 import { ui } from '../styles/theme';
 
@@ -16,22 +17,13 @@ export default function Home() {
             Echoes of Space
           </Link>
           <nav className="flex items-center gap-3 sm:gap-6 text-sm sm:text-base font-semibold">
-            <Link
-              to="/compare"
-              className="text-slate-300 hover:text-space-cyan transition-colors rounded px-1"
-            >
+            <Link to="/compare" className="text-slate-300 hover:text-space-cyan transition-colors rounded px-1">
               Compare
             </Link>
-            <Link
-              to="/quiz"
-              className="text-slate-300 hover:text-space-cyan transition-colors rounded px-1"
-            >
+            <Link to="/quiz" className="text-slate-300 hover:text-space-cyan transition-colors rounded px-1">
               Quiz
             </Link>
-            <Link
-              to="/sources"
-              className="text-slate-300 hover:text-space-cyan transition-colors rounded px-1"
-            >
+            <Link to="/sources" className="text-slate-300 hover:text-space-cyan transition-colors rounded px-1">
               Sources
             </Link>
           </nav>
@@ -40,20 +32,25 @@ export default function Home() {
 
       {/* Main Content */}
       <main className="flex-1 max-w-6xl mx-auto w-full px-4 py-8 sm:py-16">
-        {/* Hero Section */}
-        <section className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
-          <span className="inline-block px-3 py-1 mb-4 text-xs sm:text-sm font-bold tracking-wider uppercase bg-navy-800 text-space-cyan rounded-full border border-navy-700">
-            Interactive Space Museum
-          </span>
-          <h1 className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight text-white leading-tight mb-5">
-            Machines we left behind.{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-space-cyan via-sky-300 to-indigo-300">
-              Stories worth remembering.
+        {/* Hero Section with 3D planet behind headline */}
+        <section className="relative text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+          <div className="absolute inset-0 -top-8 sm:-top-14 flex items-center justify-center opacity-30 sm:opacity-40 -z-10 h-72 sm:h-96">
+            <HeroPlanet body="mars" />
+          </div>
+          <div className="relative z-10">
+            <span className="inline-block px-3 py-1 mb-4 text-xs sm:text-sm font-bold tracking-wider uppercase bg-navy-800 text-space-cyan rounded-full border border-navy-700 shadow-sm">
+              Interactive Space Museum
             </span>
-          </h1>
-          <p className="text-base sm:text-xl text-slate-300 leading-relaxed font-normal">
-            Listen to three legendary NASA explorers tell their own stories from Mars and the Moon, backed by real NASA data.
-          </p>
+            <h1 className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight text-white leading-tight mb-5">
+              Machines we left behind.{' '}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-space-cyan via-sky-300 to-indigo-300">
+                Stories worth remembering.
+              </span>
+            </h1>
+            <p className="text-base sm:text-xl text-slate-300 leading-relaxed font-normal">
+              Listen to three legendary NASA explorers tell their own stories from Mars and the Moon, backed by real NASA data.
+            </p>
+          </div>
         </section>
 
         {/* Stories Cards Grid */}

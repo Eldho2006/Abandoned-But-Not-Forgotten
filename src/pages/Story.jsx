@@ -6,6 +6,7 @@ import Timeline from '../components/Timeline';
 import ThenNow from '../components/ThenNow';
 import DustStormChart from '../components/DustStormChart';
 import ChartErrorBoundary from '../components/ChartErrorBoundary';
+import HeroPlanet from '../components/3d/HeroPlanet';
 import { fetchAndParseDustStormData } from '../lib/parseCsv';
 
 export default function Story() {
@@ -56,6 +57,8 @@ export default function Story() {
 
   if (!story) return <Navigate to="/404" replace />;
 
+  const targetBody = story.planet === 'Moon' ? 'moon' : 'mars';
+
   const handleSelectChapter = (idx) => {
     setActiveChapter(idx);
     const el = document.getElementById(`chapter-${idx}`);
@@ -90,18 +93,24 @@ export default function Story() {
       />
 
       <main className="flex-1 max-w-4xl mx-auto w-full px-4 py-8 sm:py-12 space-y-10 sm:space-y-12">
-        <section className="text-center max-w-2xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-3 py-1 mb-3 rounded-full bg-navy-900 border border-navy-700 text-xs sm:text-sm font-semibold text-slate-300">
-            <span>{story.planet}</span>
-            <span>&bull;</span>
-            <span>{story.mission}</span>
+        {/* Story Header with matching 3D celestial body */}
+        <section className="relative text-center max-w-2xl mx-auto py-2">
+          <div className="absolute inset-0 -top-4 flex items-center justify-center opacity-25 sm:opacity-35 -z-10 h-56 sm:h-72">
+            <HeroPlanet body={targetBody} />
           </div>
-          <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight mb-4">
-            {story.name}
-          </h1>
-          <p className="text-lg sm:text-xl text-slate-300 font-medium italic">
-            &ldquo;{story.hook}&rdquo;
-          </p>
+          <div className="relative z-10">
+            <div className="inline-flex items-center gap-2 px-3 py-1 mb-3 rounded-full bg-navy-900 border border-navy-700 text-xs sm:text-sm font-semibold text-slate-300">
+              <span>{story.planet}</span>
+              <span>&bull;</span>
+              <span>{story.mission}</span>
+            </div>
+            <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight mb-4">
+              {story.name}
+            </h1>
+            <p className="text-lg sm:text-xl text-slate-300 font-medium italic">
+              &ldquo;{story.hook}&rdquo;
+            </p>
+          </div>
         </section>
 
         <section aria-label="Story chapters" className="space-y-8">
