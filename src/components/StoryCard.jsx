@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom';
+import { ui } from '../styles/theme';
 
 function PlanetIcon({ planet }) {
   if (planet === 'Mars') {
     return (
       <svg
-        className="w-8 h-8 text-orange-400 flex-shrink-0"
+        className="w-8 h-8 text-mars flex-shrink-0"
         viewBox="0 0 24 24"
         fill="currentColor"
         role="img"
@@ -40,27 +41,32 @@ function PlanetIcon({ planet }) {
 
 export default function StoryCard({ story }) {
   if (!story) return null;
+  const isMars = story.planet === 'Mars';
 
   return (
-    <article className="flex flex-col justify-between bg-slate-900/90 border border-slate-700/80 rounded-2xl p-6 shadow-xl hover:border-sky-500/60 transition-colors duration-200">
+    <article className={`${ui.card} ${ui.cardHover} flex flex-col justify-between group`}>
       <div>
         <div className="flex items-center justify-between gap-3 mb-4">
           <div className="flex items-center gap-2.5">
             <PlanetIcon planet={story.planet} />
-            <span className="text-sm font-semibold tracking-wider uppercase text-slate-300">
+            <span
+              className={`text-xs sm:text-sm font-bold tracking-wider uppercase ${
+                isMars ? 'text-mars-light' : 'text-slate-300'
+              }`}
+            >
               {story.planet}
             </span>
           </div>
-          <span className="text-xs px-2.5 py-1 bg-slate-800 text-slate-300 rounded-full font-medium border border-slate-700">
+          <span className="text-xs px-2.5 py-1 bg-navy-800 text-slate-300 rounded-full font-medium border border-navy-700">
             {story.mission}
           </span>
         </div>
 
-        <h2 className="text-2xl sm:text-3xl font-extrabold text-white mb-3 tracking-tight">
+        <h2 className="text-2xl sm:text-3xl font-black text-white mb-3 tracking-tight group-hover:text-space-cyan transition-colors duration-150">
           {story.name}
         </h2>
 
-        <p className="text-base sm:text-lg text-sky-200/90 italic font-medium mb-6 leading-snug">
+        <p className="text-base sm:text-lg text-slate-300 italic font-medium mb-6 leading-relaxed">
           &ldquo;{story.hook}&rdquo;
         </p>
       </div>
@@ -68,7 +74,7 @@ export default function StoryCard({ story }) {
       <div className="pt-2">
         <Link
           to={`/story/${story.id}`}
-          className="inline-flex items-center justify-center w-full min-h-[48px] px-6 py-3 text-base sm:text-lg font-bold text-slate-950 bg-sky-400 hover:bg-sky-300 focus:outline-none focus:ring-4 focus:ring-sky-500/50 rounded-xl transition duration-150 shadow-md active:scale-[0.98]"
+          className={`${ui.buttonPrimary} w-full text-base sm:text-lg`}
           aria-label={`Hear the story of ${story.name}`}
         >
           Hear its story &rarr;

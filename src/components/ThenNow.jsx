@@ -1,19 +1,18 @@
 export default function ThenNow({ plannedLifespan, actualLifespan, endEvent }) {
-  // If plannedLifespan is null (e.g. Apollo 11 Eagle), hide the bar and show the 'left behind' note instead
   if (!plannedLifespan) {
     return (
-      <div className="p-6 sm:p-8 rounded-2xl bg-slate-900/90 border border-slate-800 shadow-xl">
+      <div className="p-6 sm:p-8 rounded-2xl bg-navy-900/90 border border-navy-700/80 shadow-xl">
         <div className="flex items-center gap-2 mb-3">
-          <span className="text-xs font-bold uppercase tracking-wider text-amber-400">
+          <span className="text-xs font-bold uppercase tracking-wider text-mars-light">
             Mission Legacy
           </span>
         </div>
-        <h3 className="text-xl sm:text-2xl font-bold text-white mb-3">
+        <h3 className="text-xl sm:text-2xl font-black text-white mb-3">
           Left Behind on the Surface
         </h3>
-        <div className="p-4 rounded-xl bg-slate-950/80 border border-slate-800 text-slate-300 space-y-2">
-          <p className="font-medium text-slate-200">
-            <span className="text-amber-400 font-bold">Status: </span>
+        <div className="p-4 rounded-xl bg-navy-950 border border-navy-700 text-slate-300 space-y-2">
+          <p className="font-semibold text-slate-200">
+            <span className="text-mars-light font-bold">Status: </span>
             {actualLifespan || 'Remains on the surface'}
           </p>
           {endEvent && (
@@ -31,9 +30,9 @@ export default function ThenNow({ plannedLifespan, actualLifespan, endEvent }) {
   }
 
   return (
-    <div className="p-6 sm:p-8 rounded-2xl bg-slate-900/90 border border-slate-800 shadow-xl">
+    <div className="p-6 sm:p-8 rounded-2xl bg-navy-900/90 border border-navy-700/80 shadow-xl">
       <div className="flex items-center justify-between gap-2 mb-2">
-        <span className="text-xs font-bold uppercase tracking-wider text-sky-400">
+        <span className="text-xs font-bold uppercase tracking-wider text-space-cyan">
           Then vs Now
         </span>
         <span className="text-xs text-slate-400 font-medium">
@@ -41,7 +40,7 @@ export default function ThenNow({ plannedLifespan, actualLifespan, endEvent }) {
         </span>
       </div>
 
-      <h3 className="text-xl sm:text-2xl font-bold text-white mb-6">
+      <h3 className="text-xl sm:text-2xl font-black text-white mb-6">
         How long did it last?
       </h3>
 
@@ -56,9 +55,9 @@ export default function ThenNow({ plannedLifespan, actualLifespan, endEvent }) {
               {plannedLifespan}
             </span>
           </div>
-          <div className="w-full bg-slate-950 rounded-full h-4 p-0.5 border border-slate-800">
+          <div className="w-full bg-navy-950 rounded-full h-4 p-0.5 border border-navy-700">
             <div
-              className="bg-slate-500 h-full rounded-full w-[15%] transition-all duration-1000 ease-out motion-reduce:transition-none"
+              className="bg-slate-600 h-full rounded-full w-[15%] transition-all duration-1000 ease-out motion-reduce:transition-none"
               style={{ width: '15%' }}
               aria-label={`Planned: ${plannedLifespan}`}
             />
@@ -71,13 +70,13 @@ export default function ThenNow({ plannedLifespan, actualLifespan, endEvent }) {
             <span className="text-sm font-semibold text-white">
               Actual Exploration Time
             </span>
-            <span className="text-sm font-extrabold text-emerald-400">
+            <span className="text-sm font-extrabold text-space-cyan">
               {actualLifespan}
             </span>
           </div>
-          <div className="w-full bg-slate-950 rounded-full h-4 p-0.5 border border-slate-800">
+          <div className="w-full bg-navy-950 rounded-full h-4 p-0.5 border border-navy-700">
             <div
-              className="bg-gradient-to-r from-emerald-500 to-sky-400 h-full rounded-full transition-all duration-1000 ease-out motion-reduce:transition-none shadow-sm shadow-emerald-500/50"
+              className="bg-gradient-to-r from-teal-400 to-space-cyan h-full rounded-full transition-all duration-1000 ease-out motion-reduce:transition-none shadow-sm shadow-cyan-500/40"
               style={{ width: '100%' }}
               aria-label={`Actual: ${actualLifespan}`}
             />
@@ -86,7 +85,7 @@ export default function ThenNow({ plannedLifespan, actualLifespan, endEvent }) {
       </div>
 
       {endEvent && (
-        <div className="mt-6 pt-4 border-t border-slate-800/80 text-xs sm:text-sm text-slate-400">
+        <div className="mt-6 pt-4 border-t border-navy-700 text-xs sm:text-sm text-slate-400">
           <span className="font-semibold text-slate-300">Conclusion: </span>
           {endEvent}
         </div>

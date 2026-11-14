@@ -84,7 +84,7 @@ export default function ListenButton({ text, title }) {
           <button
             type="button"
             onClick={handlePlay}
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-sky-500 hover:bg-sky-400 active:bg-sky-600 text-slate-950 font-bold text-sm shadow-md transition-colors focus:outline-none focus:ring-2 focus:ring-sky-300 min-h-[44px]"
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-cyan-400 hover:bg-cyan-300 active:bg-cyan-500 text-slate-950 font-bold text-sm shadow-md transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-navy-950 focus-visible:ring-cyan-400 min-h-[44px]"
             aria-label={`Listen to ${title || 'chapter'}`}
           >
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -154,17 +154,17 @@ export default function ListenButton({ text, title }) {
 
       {/* Captions: Always visible */}
       <div
-        className="p-3.5 bg-slate-950/90 border border-slate-700/80 rounded-xl text-slate-200 text-sm leading-relaxed"
+        className="p-4 bg-navy-950 border border-navy-700/80 rounded-xl text-slate-200 text-sm leading-relaxed shadow-inner"
         role="region"
         aria-label="Captions"
       >
-        <span className="text-xs uppercase font-extrabold tracking-wider text-sky-400 block mb-1">
+        <span className="text-xs uppercase font-extrabold tracking-wider text-space-cyan block mb-1">
           Captions {status === 'playing' ? '(Reading now...)' : ''}
         </span>
         <p>
           {status === 'playing' && highlightIdx > 0 ? (
             <>
-              <span className="text-sky-300 font-medium">
+              <span className="text-space-cyan font-semibold">
                 {text.slice(0, highlightIdx)}
               </span>
               <span>{text.slice(highlightIdx)}</span>
