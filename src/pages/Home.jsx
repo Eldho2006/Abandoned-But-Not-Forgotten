@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import StoryCard from '../components/StoryCard';
-import HeroPlanet from '../components/3d/HeroPlanet';
+import HomeOrb from '../components/3d/HomeOrb';
 import storiesData from '../data/stories.json';
 import { ui } from '../styles/theme';
 
@@ -32,22 +32,22 @@ export default function Home() {
 
       {/* Main Content */}
       <main className="flex-1 max-w-6xl mx-auto w-full px-4 py-12 sm:py-20 space-y-16 sm:space-y-24">
-        {/* Hero Section with 3D planet behind headline */}
-        <section className="relative text-center max-w-3xl mx-auto">
-          <div className="absolute inset-0 -top-8 sm:-top-16 flex items-center justify-center opacity-30 sm:opacity-40 -z-10 h-72 sm:h-96">
-            <HeroPlanet body="mars" />
+        {/* Hero Section with interactive 3D draggable orb behind headline */}
+        <section className="relative text-center max-w-4xl mx-auto min-h-[420px] sm:min-h-[480px] flex items-center justify-center">
+          <div className="absolute inset-0 flex items-center justify-center">
+            <HomeOrb />
           </div>
-          <div className="relative z-10">
-            <span className="inline-block px-3.5 py-1 mb-5 text-xs sm:text-sm font-semibold tracking-wider uppercase bg-navy-800 text-space-cyan rounded-full border border-navy-700 shadow-sm">
+          <div className="relative z-10 pointer-events-none px-4 py-8 max-w-3xl mx-auto">
+            <span className="inline-block px-3.5 py-1 mb-5 text-xs sm:text-sm font-semibold tracking-wider uppercase bg-navy-900/90 text-space-cyan rounded-full border border-navy-700 shadow-sm backdrop-blur-sm">
               Interactive Space Museum
             </span>
-            <h1 className="font-serif text-4xl sm:text-6xl md:text-7xl font-normal tracking-tight text-white leading-[1.08] mb-6">
+            <h1 className="font-serif text-4xl sm:text-6xl md:text-7xl font-normal tracking-tight text-white leading-[1.08] mb-6 drop-shadow-[0_4px_16px_rgba(3,7,18,0.95)]">
               Machines we left behind.{' '}
               <span className="italic text-transparent bg-clip-text bg-gradient-to-r from-space-cyan via-sky-300 to-indigo-300">
                 Stories worth remembering.
               </span>
             </h1>
-            <p className="text-base sm:text-xl text-slate-300 leading-relaxed font-normal max-w-[65ch] mx-auto">
+            <p className="text-base sm:text-xl text-slate-200 leading-relaxed font-normal max-w-[65ch] mx-auto drop-shadow-[0_2px_10px_rgba(3,7,18,0.95)]">
               Listen to three legendary NASA explorers tell their own stories from Mars and the Moon, backed by real NASA data.
             </p>
           </div>
