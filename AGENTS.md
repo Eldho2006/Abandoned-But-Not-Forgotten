@@ -28,10 +28,9 @@ Audience: school-age kids. Reading level: grades 6-8.
 - Keep files small (<200 lines). Explain changes in 3 lines max.
 - Never rewrite working files to restyle them unless asked.
 
-
-## 3D rules (v2)
-- Allowed: three, @react-three/fiber, @react-three/drei. Use versions compatible with this project's React version.
-- Procedural geometry only (primitives, noise terrain). No downloaded 3D models or textures unless they are NASA public domain with credits listed in the Sources page.
-- Lazy-load every 3D component. Always provide a non-3D fallback (static image/CSS) when WebGL is unavailable or prefers-reduced-motion is set.
-- Keep scenes under 60fps-safe complexity on a phone. No post-processing.
-- 3D is decoration and exploration, never the only way to read a fact.
+## V2 3D rules
+- Reference sites are inspiration only. Never copy their code, assets or fonts.
+- Allowed: three, @react-three/fiber, @react-three/drei. Procedural geometry only.
+- Lazy-load every 3D component. Always provide a non-3D fallback (WebGL missing or prefers-reduced-motion).
+- 3D never carries a fact: every fact must also be plain text.
+- Self-host fonts via npm. No remote requests at runtime.
