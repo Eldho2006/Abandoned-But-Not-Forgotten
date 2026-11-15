@@ -103,6 +103,9 @@ export type GlassFolderProps = {
     appear?: boolean
     /** Delay before that entrance, in ms — for staggering a row of folders. */
     appearDelay?: number
+    ariaControls?: string
+    ariaExpanded?: boolean
+    buttonRef?: React.Ref<HTMLButtonElement>
     className?: string
     style?: React.CSSProperties
 }
@@ -549,6 +552,9 @@ export default function GlassFolder({
     width = 340,
     appear = true,
     appearDelay = 0,
+    ariaControls,
+    ariaExpanded,
+    buttonRef,
     className,
     style,
 }: GlassFolderProps) {
@@ -758,10 +764,15 @@ export default function GlassFolder({
                             <path d={FRONT_PATH} stroke={"url(#gf-rim-" + uid + ")"} />
                         </svg>
                         <button
-                            ref={hitRef}
+                            ref={(node) => {
+                                (hitRef as React.MutableRefObject<HTMLButtonElement | null>).current = node
+                                if (typeof buttonRef === "function") buttonRef(node)
+                                else if (buttonRef) (buttonRef as React.MutableRefObject<HTMLButtonElement | null>).current = node
+                            }}
                             type="button"
                             className="gf-hit"
-                            aria-expanded={open}
+                            aria-expanded={ariaExpanded !== undefined ? ariaExpanded : open}
+                            aria-controls={ariaControls}
                             aria-label={(open ? "Close " : "Open ") + label + ", " + count + (count === 1 ? " item" : " items")}
                             onClick={() => {
                                 setMenuOpen(false)
