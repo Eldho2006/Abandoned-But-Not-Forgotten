@@ -25,12 +25,12 @@ export default function Story() {
     if (id === 'opportunity') {
       setDustLoading(true);
       fetchAndParseDustStormData()
-        .then((data) => {
-          setDustData(data);
+        .then((merged) => {
+          setDustData(merged);
           setDustLoading(false);
         })
         .catch((err) => {
-          setDustError(err?.message || 'Could not load NASA dust storm data.');
+          setDustError(err.message || 'Failed to load storm data');
           setDustLoading(false);
         });
     }
@@ -38,25 +38,25 @@ export default function Story() {
 
   useEffect(() => {
     if (!story) return;
-    const observers = [];
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const index = Number(entry.target.getAttribute('data-chapter-index'));
+          if (!isNaN(index)) setActiveChapter(index);
+        }
+      });
+    }, { rootMargin: '-20% 0px -60% 0px', threshold: 0.1 });
+
     story.chapters.forEach((_, idx) => {
       const el = document.getElementById(`chapter-${idx}`);
-      if (!el) return;
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) setActiveChapter(idx);
-          });
-        },
-        { rootMargin: '-20% 0px -60% 0px', threshold: 0.1 }
-      );
-      observer.observe(el);
-      observers.push(observer);
+      if (el) observer.observe(el);
     });
-    return () => observers.forEach((obs) => obs.disconnect());
+    return () => observer.disconnect();
   }, [story]);
 
-  if (!story) return <Navigate to="/404" replace />;
+  if (!story) {
+    return <Navigate to="/" replace />;
+  }
 
   const isMoon = story.planet === 'Moon';
   const targetBody = isMoon ? 'moon' : 'mars';
@@ -71,22 +71,22 @@ export default function Story() {
   };
 
   return (
-    <div className="relative min-h-screen text-slate-100 flex flex-col font-sans">
+    <div className="relative min-h-screen text-ivory flex flex-col font-sans">
       {/* Scroll-driven 3D background matching body (Mars / Moon) */}
       <StoryPlanetBackground body={targetBody} activeChapter={activeChapter} />
 
-      <header className="w-full border-b border-navy-700 bg-navy-950/80 backdrop-blur-md sticky top-0 z-30">
+      <header className="w-full border-b border-border bg-bg/85 backdrop-blur-md sticky top-0 z-30">
         <div className="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
           <Link
             to="/"
-            className="text-sm sm:text-base font-bold text-space-cyan hover:text-cyan-300 transition-colors flex items-center gap-1.5 focus-visible:underline"
+            className="text-sm sm:text-base font-bold text-brass hover:text-brass-hover transition-colors flex items-center gap-1.5 focus-visible:underline"
           >
             &larr; Back to all stories
           </Link>
-          <div className="flex items-center gap-4 text-xs sm:text-sm font-semibold text-slate-300">
-            <Link to="/compare" className="hover:text-space-cyan transition-colors">Compare</Link>
-            <Link to="/quiz" className="hover:text-space-cyan transition-colors">Quiz</Link>
-            <Link to="/sources" className="hover:text-space-cyan transition-colors">Sources</Link>
+          <div className="flex items-center gap-4 text-xs sm:text-sm font-semibold text-muted">
+            <Link to="/compare" className="hover:text-brass transition-colors">Compare</Link>
+            <Link to="/quiz" className="hover:text-brass transition-colors">Quiz</Link>
+            <Link to="/sources" className="hover:text-brass transition-colors">Sources</Link>
           </div>
         </div>
       </header>
@@ -100,24 +100,27 @@ export default function Story() {
       <main className="flex-1 max-w-4xl mx-auto w-full px-4 py-12 sm:py-20 space-y-12 sm:space-y-16">
         {/* Story Header */}
         <section className="text-center max-w-2xl mx-auto py-4">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 mb-4 rounded-full bg-navy-900 border border-navy-700 text-xs sm:text-sm font-semibold text-slate-300">
-            <span className={isMoon ? 'text-slate-300' : 'text-mars-light'}>{story.planet}</span>
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 mb-4 rounded-full bg-surface border border-border text-xs sm:text-sm font-semibold text-muted">
+            <span className={isMoon ? 'text-silver' : 'text-terracotta'}>{story.planet}</span>
             <span>&bull;</span>
             <span>{story.mission}</span>
           </div>
-          <h1 className="font-serif text-4xl sm:text-6xl md:text-7xl font-normal text-white tracking-tight leading-[1.08] mb-4">
+          <h1 className="font-serif text-4xl sm:text-6xl md:text-7xl font-normal text-ivory tracking-tight leading-[1.08] mb-4">
             {story.name}
           </h1>
-          <p className="text-lg sm:text-xl text-slate-300 font-normal italic max-w-[65ch] mx-auto leading-relaxed">
+          <p className="text-base sm:text-xl text-muted italic font-normal max-w-[65ch] mx-auto">
             &ldquo;{story.hook}&rdquo;
           </p>
         </section>
 
-        <section aria-label="Story chapters" className="space-y-8 sm:space-y-10">
+        {/* Chapters */}
+        <section aria-label="Story Chapters" className="space-y-10 sm:space-y-14">
           {story.chapters.map((chapter, idx) => (
             <Fragment key={chapter.title || idx}>
-              <ChapterBlock chapter={chapter} index={idx} id={`chapter-${idx}`} />
-              {story.id === 'opportunity' && idx === 3 && (
+              <div data-chapter-index={idx} id={`chapter-${idx}`}>
+                <ChapterBlock chapter={chapter} index={idx} id={`chapter-block-${idx}`} />
+              </div>
+              {story.id === 'opportunity' && chapter.title === 'The storm' && (
                 <div id="opportunity-chart" className="pt-2">
                   <ChartErrorBoundary>
                     <DustStormChart data={dustData} loading={dustLoading} error={dustError} />
@@ -136,15 +139,15 @@ export default function Story() {
           />
         </section>
 
-        <section className="p-6 sm:p-10 rounded-2xl bg-navy-900/90 border border-navy-700/80 shadow-xl">
+        <section className="p-6 sm:p-10 rounded-2xl bg-surface/90 border border-border shadow-xl">
           <div className="max-w-[65ch] mx-auto">
-            <span className="text-xs font-bold uppercase tracking-wider text-space-cyan block mb-2">
+            <span className="text-xs font-bold uppercase tracking-wider text-brass block mb-2">
               Big Picture
             </span>
-            <h2 className="font-serif text-3xl sm:text-4xl font-normal text-white mb-4 tracking-tight leading-snug">
+            <h2 className="font-serif text-3xl sm:text-4xl font-normal text-ivory mb-4 tracking-tight leading-snug">
               Why it matters
             </h2>
-            <p className="text-base sm:text-lg text-slate-200 leading-relaxed font-normal">
+            <p className="text-base sm:text-lg text-ivory/90 leading-relaxed font-normal">
               {story.whyItMatters}
             </p>
           </div>
@@ -155,15 +158,15 @@ export default function Story() {
         {isDebug && story.verifyNotes && (
           <aside
             aria-label="Debug Verification Notes"
-            className="p-4 rounded-xl bg-amber-950/60 border border-amber-600/80 text-amber-200 text-xs space-y-2"
+            className="p-4 rounded-xl bg-surface border border-terracotta/60 text-ivory text-xs space-y-2"
           >
-            <div className="flex items-center gap-2 font-bold uppercase tracking-wider text-amber-400">
+            <div className="flex items-center gap-2 font-bold uppercase tracking-wider text-terracotta">
               <svg className="w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
                 <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
               </svg>
               Debug Mode: Verification Notes
             </div>
-            <ul className="list-disc pl-5 space-y-1">
+            <ul className="list-disc pl-5 space-y-1 text-muted">
               {story.verifyNotes.map((note, i) => (
                 <li key={i}>{note}</li>
               ))}
@@ -171,15 +174,15 @@ export default function Story() {
           </aside>
         )}
 
-        <nav className="pt-8 border-t border-navy-700 flex flex-wrap justify-between gap-4 text-sm font-semibold">
-          <Link to="/" className="text-slate-400 hover:text-white transition-colors">
+        <nav className="pt-8 border-t border-border flex flex-wrap justify-between gap-4 text-sm font-semibold">
+          <Link to="/" className="text-muted hover:text-ivory transition-colors">
             &larr; Back to all machines
           </Link>
           <div className="flex gap-4">
-            <Link to="/compare" className="text-space-cyan hover:text-cyan-300">
+            <Link to="/compare" className="text-brass hover:text-brass-hover">
               Compare machines &rarr;
             </Link>
-            <Link to="/quiz" className="text-space-cyan hover:text-cyan-300">
+            <Link to="/quiz" className="text-brass hover:text-brass-hover">
               Take Quiz &rarr;
             </Link>
           </div>

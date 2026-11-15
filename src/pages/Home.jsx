@@ -6,24 +6,24 @@ import { ui } from '../styles/theme';
 
 export default function Home() {
   return (
-    <div className="star-field min-h-screen text-slate-100 flex flex-col font-sans">
+    <div className="star-field min-h-screen text-ivory flex flex-col font-sans">
       {/* Top Navigation */}
-      <header className="w-full border-b border-navy-700 bg-navy-950/80 backdrop-blur-md sticky top-0 z-20">
+      <header className="w-full border-b border-border bg-bg/85 backdrop-blur-md sticky top-0 z-20">
         <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
           <Link
             to="/"
-            className="font-serif text-2xl sm:text-3xl font-normal tracking-tight text-white hover:text-space-cyan transition-colors"
+            className="font-serif text-2xl sm:text-3xl font-normal tracking-tight text-ivory hover:text-brass transition-colors"
           >
             Echoes of Space
           </Link>
           <nav className="flex items-center gap-4 sm:gap-8 text-sm sm:text-base font-semibold">
-            <Link to="/compare" className="text-slate-300 hover:text-space-cyan transition-colors rounded px-1">
+            <Link to="/compare" className="text-muted hover:text-brass transition-colors rounded px-1">
               Compare
             </Link>
-            <Link to="/quiz" className="text-slate-300 hover:text-space-cyan transition-colors rounded px-1">
+            <Link to="/quiz" className="text-muted hover:text-brass transition-colors rounded px-1">
               Quiz
             </Link>
-            <Link to="/sources" className="text-slate-300 hover:text-space-cyan transition-colors rounded px-1">
+            <Link to="/sources" className="text-muted hover:text-brass transition-colors rounded px-1">
               Sources
             </Link>
           </nav>
@@ -38,16 +38,16 @@ export default function Home() {
             <HomeOrb />
           </div>
           <div className="relative z-10 pointer-events-none px-4 py-8 max-w-3xl mx-auto">
-            <span className="inline-block px-3.5 py-1 mb-5 text-xs sm:text-sm font-semibold tracking-wider uppercase bg-navy-900/90 text-space-cyan rounded-full border border-navy-700 shadow-sm backdrop-blur-sm">
+            <span className="inline-block px-3.5 py-1 mb-5 text-xs sm:text-sm font-semibold tracking-wider uppercase bg-surface/90 text-brass rounded-full border border-border shadow-sm backdrop-blur-sm">
               Interactive Space Museum
             </span>
-            <h1 className="font-serif text-4xl sm:text-6xl md:text-7xl font-normal tracking-tight text-white leading-[1.08] mb-6 drop-shadow-[0_4px_16px_rgba(3,7,18,0.95)]">
+            <h1 className="font-serif text-4xl sm:text-6xl md:text-7xl font-normal tracking-tight text-ivory leading-[1.08] mb-6 drop-shadow-[0_4px_16px_rgba(11,15,20,0.95)]">
               Machines we left behind.{' '}
-              <span className="italic text-transparent bg-clip-text bg-gradient-to-r from-space-cyan via-sky-300 to-indigo-300">
+              <span className="italic text-transparent bg-clip-text bg-gradient-to-r from-brass via-ivory to-terracotta">
                 Stories worth remembering.
               </span>
             </h1>
-            <p className="text-base sm:text-xl text-slate-200 leading-relaxed font-normal max-w-[65ch] mx-auto drop-shadow-[0_2px_10px_rgba(3,7,18,0.95)]">
+            <p className="text-base sm:text-xl text-ivory/90 leading-relaxed font-normal max-w-[65ch] mx-auto drop-shadow-[0_2px_10px_rgba(11,15,20,0.95)]">
               Listen to three legendary NASA explorers tell their own stories from Mars and the Moon, backed by real NASA data.
             </p>
           </div>
@@ -64,7 +64,7 @@ export default function Home() {
 
         {/* Action Links */}
         <section className="text-center pt-4">
-          <p className="text-sm text-slate-400 mb-4 font-medium">
+          <p className="text-sm text-muted mb-4 font-medium">
             Want to see all three side-by-side or test your knowledge?
           </p>
           <div className="flex flex-wrap justify-center gap-3">

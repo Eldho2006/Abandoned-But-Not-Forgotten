@@ -3,7 +3,7 @@ import { isSpeechSupported, speakText, pauseSpeech, resumeSpeech, stopSpeech } f
 
 export default function ListenButton({ text, title }) {
   const [supported, setSupported] = useState(true);
-  const [status, setStatus] = useState('idle'); // 'idle' | 'playing' | 'paused'
+  const [status, setStatus] = useState('idle');
   const [highlightIdx, setHighlightIdx] = useState(0);
   const mountedRef = useRef(true);
 
@@ -64,12 +64,12 @@ export default function ListenButton({ text, title }) {
 
   if (!supported) {
     return (
-      <div className="mt-4 p-4 rounded-xl bg-slate-900 border border-slate-700 text-sm">
-        <p className="text-amber-300 font-semibold mb-2">
+      <div className="mt-4 p-4 rounded-xl bg-surface border border-border text-sm">
+        <p className="text-terracotta font-semibold mb-2">
           Audio narration is not supported in this browser.
         </p>
-        <div className="p-3 bg-slate-950 rounded-lg text-slate-200">
-          <span className="font-bold text-sky-400 block mb-1">Captions:</span>
+        <div className="p-3 bg-bg rounded-lg text-ivory">
+          <span className="font-bold text-brass block mb-1">Captions:</span>
           <p className="leading-relaxed">{text}</p>
         </div>
       </div>
@@ -84,10 +84,10 @@ export default function ListenButton({ text, title }) {
           <button
             type="button"
             onClick={handlePlay}
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-cyan-400 hover:bg-cyan-300 active:bg-cyan-500 text-slate-950 font-bold text-sm shadow-md transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-navy-950 focus-visible:ring-cyan-400 min-h-[44px]"
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-brass hover:bg-brass-hover active:bg-brass-dark text-bg font-bold text-sm shadow-md transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-bg focus-visible:ring-brass min-h-[44px]"
             aria-label={`Listen to ${title || 'chapter'}`}
           >
-            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg className="w-5 h-5 text-bg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072M18.364 5.636a9 9 0 010 12.728M11 5L6 9H2v6h4l5 4V5z" />
             </svg>
             Listen to Chapter
@@ -99,7 +99,7 @@ export default function ListenButton({ text, title }) {
             <button
               type="button"
               onClick={handlePause}
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-sm shadow-md transition-colors focus:outline-none focus:ring-2 focus:ring-amber-300 min-h-[44px]"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-surface hover:bg-surface-alt border border-border text-ivory font-bold text-sm shadow-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brass min-h-[44px]"
               aria-label="Pause narration"
             >
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -110,7 +110,7 @@ export default function ListenButton({ text, title }) {
             <button
               type="button"
               onClick={handleStop}
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-slate-700 hover:bg-slate-600 text-white font-bold text-sm shadow-md transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 min-h-[44px]"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-surface hover:bg-surface-alt border border-border text-muted font-bold text-sm shadow-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brass min-h-[44px]"
               aria-label="Stop narration"
             >
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -127,10 +127,10 @@ export default function ListenButton({ text, title }) {
             <button
               type="button"
               onClick={handlePlay}
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-sm shadow-md transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-300 min-h-[44px]"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-brass hover:bg-brass-hover text-bg font-bold text-sm shadow-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brass min-h-[44px]"
               aria-label="Resume narration"
             >
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="w-5 h-5 text-bg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
@@ -139,7 +139,7 @@ export default function ListenButton({ text, title }) {
             <button
               type="button"
               onClick={handleStop}
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-slate-700 hover:bg-slate-600 text-white font-bold text-sm shadow-md transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 min-h-[44px]"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-surface hover:bg-surface-alt border border-border text-muted font-bold text-sm shadow-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brass min-h-[44px]"
               aria-label="Stop narration"
             >
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -154,17 +154,17 @@ export default function ListenButton({ text, title }) {
 
       {/* Captions: Always visible */}
       <div
-        className="p-4 bg-navy-950 border border-navy-700/80 rounded-xl text-slate-200 text-sm leading-relaxed shadow-inner"
+        className="p-4 bg-bg border border-border rounded-xl text-ivory text-sm leading-relaxed shadow-inner"
         role="region"
         aria-label="Captions"
       >
-        <span className="text-xs uppercase font-extrabold tracking-wider text-space-cyan block mb-1">
+        <span className="text-xs uppercase font-extrabold tracking-wider text-brass block mb-1">
           Captions {status === 'playing' ? '(Reading now...)' : ''}
         </span>
         <p>
           {status === 'playing' && highlightIdx > 0 ? (
             <>
-              <span className="text-space-cyan font-semibold">
+              <span className="text-brass font-semibold">
                 {text.slice(0, highlightIdx)}
               </span>
               <span>{text.slice(highlightIdx)}</span>

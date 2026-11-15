@@ -93,7 +93,7 @@ export default function CertificateScene({ story, isTabVisible = true }) {
     >
       <ambientLight intensity={0.7} />
       <directionalLight position={[4, 5, 4]} intensity={1.4} />
-      <directionalLight position={[-3, -3, -2]} intensity={0.3} color="#22d3ee" />
+      <directionalLight position={[-3, -3, -2]} intensity={0.3} color="#C9A96E" />
       <CertificateCard story={story} />
     </Canvas>
   );

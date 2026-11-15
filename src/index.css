@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply bg-navy-950 text-slate-100 antialiased;
+    @apply bg-bg text-ivory antialiased;
   }
 
   /* Accessible focus indicators for keyboard navigation */
@@ -12,32 +12,33 @@
   button:focus-visible,
   input:focus-visible {
     outline: none;
-    box-shadow: 0 0 0 2px #030712, 0 0 0 4px #22d3ee;
+    box-shadow: 0 0 0 2px #0B0F14, 0 0 0 4px #C9A96E;
   }
 }
 
 @keyframes twinkle {
   0%, 100% {
-    opacity: 0.85;
+    opacity: 0.65;
   }
   50% {
-    opacity: 1;
+    opacity: 0.9;
   }
 }
 
+/* Softer, lower-contrast star field without neon glow */
 .star-field {
-  background-color: #030712;
+  background-color: #0B0F14;
   background-image:
-    radial-gradient(1px 1px at 25px 35px, #ffffff, rgba(0, 0, 0, 0)),
-    radial-gradient(1px 1px at 55px 120px, rgba(255, 255, 255, 0.7), rgba(0, 0, 0, 0)),
-    radial-gradient(1.5px 1.5px at 110px 60px, #e2e8f0, rgba(0, 0, 0, 0)),
-    radial-gradient(1px 1px at 180px 150px, #ffffff, rgba(0, 0, 0, 0)),
-    radial-gradient(2px 2px at 240px 40px, #22d3ee, rgba(0, 0, 0, 0)),
-    radial-gradient(1px 1px at 290px 210px, rgba(255, 255, 255, 0.8), rgba(0, 0, 0, 0)),
-    radial-gradient(1.5px 1.5px at 350px 130px, #fb923c, rgba(0, 0, 0, 0));
+    radial-gradient(1px 1px at 25px 35px, rgba(237, 232, 220, 0.4), rgba(0, 0, 0, 0)),
+    radial-gradient(1px 1px at 55px 120px, rgba(237, 232, 220, 0.25), rgba(0, 0, 0, 0)),
+    radial-gradient(1.5px 1.5px at 110px 60px, rgba(184, 190, 198, 0.3), rgba(0, 0, 0, 0)),
+    radial-gradient(1px 1px at 180px 150px, rgba(237, 232, 220, 0.35), rgba(0, 0, 0, 0)),
+    radial-gradient(1.5px 1.5px at 240px 40px, rgba(201, 169, 110, 0.3), rgba(0, 0, 0, 0)),
+    radial-gradient(1px 1px at 290px 210px, rgba(237, 232, 220, 0.3), rgba(0, 0, 0, 0)),
+    radial-gradient(1.5px 1.5px at 350px 130px, rgba(201, 123, 90, 0.25), rgba(0, 0, 0, 0));
   background-repeat: repeat;
   background-size: 380px 280px;
-  animation: twinkle 6s ease-in-out infinite;
+  animation: twinkle 8s ease-in-out infinite;
 }
 
 @keyframes fadeIn {

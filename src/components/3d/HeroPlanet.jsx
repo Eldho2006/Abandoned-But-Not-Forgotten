@@ -25,13 +25,13 @@ function CssPlanetFallback({ body = 'mars' }) {
       <div
         className={`w-44 h-44 sm:w-60 sm:h-60 rounded-full transition-transform duration-700 ${
           isMars
-            ? 'shadow-[0_0_60px_rgba(249,115,22,0.3)] border border-orange-500/20'
-            : 'shadow-[0_0_60px_rgba(203,213,225,0.25)] border border-slate-400/20'
+            ? 'shadow-[0_0_50px_rgba(201,123,90,0.18)] border border-terracotta/20'
+            : 'shadow-[0_0_50px_rgba(184,190,198,0.18)] border border-silver/20'
         }`}
         style={{
           background: isMars
-            ? 'radial-gradient(circle at 35% 30%, #fed7aa 0%, #f97316 25%, #c2410c 60%, #431407 100%)'
-            : 'radial-gradient(circle at 35% 30%, #f8fafc 0%, #cbd5e1 30%, #64748b 65%, #0f172a 100%)',
+            ? 'radial-gradient(circle at 35% 30%, #E8B89C 0%, #C97B5A 35%, #995235 65%, #0B0F14 100%)'
+            : 'radial-gradient(circle at 35% 30%, #EDE8DC 0%, #B8BEC6 35%, #5A626E 65%, #0B0F14 100%)',
         }}
       />
     </div>

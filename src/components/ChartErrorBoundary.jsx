@@ -17,9 +17,9 @@ export default class ChartErrorBoundary extends React.Component {
   render() {
     if (this.state.hasError) {
       return (
-        <div className="p-6 rounded-2xl bg-slate-900 border border-amber-800/60 text-slate-300 text-center space-y-2">
-          <p className="font-bold text-amber-400">Chart is temporarily unavailable.</p>
-          <p className="text-xs text-slate-400">
+        <div className="p-6 rounded-2xl bg-surface border border-terracotta/40 text-ivory text-center space-y-2">
+          <p className="font-bold text-terracotta">Chart is temporarily unavailable.</p>
+          <p className="text-xs text-muted">
             An unexpected error occurred while rendering the data visualization.
           </p>
         </div>

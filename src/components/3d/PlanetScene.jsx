@@ -14,7 +14,6 @@ function ProceduralPlanet({ body = 'mars' }) {
   const meshRef = useRef();
 
   const { geometry } = useMemo(() => {
-    // Low-poly icosahedron: detail 2 gives distinct geometric faceted look
     const geom = new THREE.IcosahedronGeometry(1.85, 2);
     geom.computeVertexNormals();
 
@@ -23,10 +22,10 @@ function ProceduralPlanet({ body = 'mars' }) {
     const colors = new Float32Array(count * 3);
 
     const isMars = body === 'mars';
-    const c1 = isMars ? new THREE.Color('#7c2d12') : new THREE.Color('#1e293b');
-    const c2 = isMars ? new THREE.Color('#ea580c') : new THREE.Color('#475569');
-    const c3 = isMars ? new THREE.Color('#f97316') : new THREE.Color('#94a3b8');
-    const cHigh = isMars ? new THREE.Color('#fef3c7') : new THREE.Color('#e2e8f0');
+    const c1 = isMars ? new THREE.Color('#6E3A24') : new THREE.Color('#2C323B');
+    const c2 = isMars ? new THREE.Color('#995235') : new THREE.Color('#5A626E');
+    const c3 = isMars ? new THREE.Color('#C97B5A') : new THREE.Color('#B8BEC6');
+    const cHigh = isMars ? new THREE.Color('#E8B89C') : new THREE.Color('#EDE8DC');
 
     const tempColor = new THREE.Color();
 
@@ -35,12 +34,10 @@ function ProceduralPlanet({ body = 'mars' }) {
       const y = pos.getY(i);
       const z = pos.getZ(i);
 
-      // Procedural height noise
-      const n = (pseudoNoise(x, y, z) + 1) / 2; // 0 to 1
+      const n = (pseudoNoise(x, y, z) + 1) / 2;
 
-      // Polar cap for Mars if near north pole
       if (isMars && y > 1.6) {
-        tempColor.set('#ffffff');
+        tempColor.set('#EDE8DC');
       } else if (n < 0.35) {
         tempColor.lerpColors(c1, c2, n / 0.35);
       } else if (n < 0.75) {
@@ -82,8 +79,8 @@ function Starfield() {
     const count = 250;
     const pos = new Float32Array(count * 3);
     const col = new Float32Array(count * 3);
-    const cWhite = new THREE.Color('#ffffff');
-    const cCyan = new THREE.Color('#22d3ee');
+    const cIvory = new THREE.Color('#EDE8DC');
+    const cSilver = new THREE.Color('#B8BEC6');
 
     for (let i = 0; i < count; i++) {
       const radius = 18 + Math.random() * 10;
@@ -94,7 +91,7 @@ function Starfield() {
       pos[i * 3 + 1] = radius * Math.sin(phi) * Math.sin(theta);
       pos[i * 3 + 2] = radius * Math.cos(phi);
 
-      const color = Math.random() > 0.8 ? cCyan : cWhite;
+      const color = Math.random() > 0.8 ? cSilver : cIvory;
       col[i * 3] = color.r;
       col[i * 3 + 1] = color.g;
       col[i * 3 + 2] = color.b;
@@ -119,22 +116,33 @@ function Starfield() {
           itemSize={3}
         />
       </bufferGeometry>
-      <pointsMaterial size={0.12} vertexColors transparent opacity={0.75} />
+      <pointsMaterial
+        size={0.1}
+        vertexColors
+        transparent
+        opacity={0.35}
+      />
     </points>
   );
 }
 
 export default function PlanetScene({ body = 'mars', isTabVisible = true }) {
+  const isMars = body === 'mars';
   return (
     <Canvas
-      camera={{ position: [0, 0, 5], fov: 45 }}
+      camera={{ position: [0, 0, 4.5], fov: 45 }}
+      dpr={[1, 2]}
       frameloop={isTabVisible ? 'always' : 'never'}
       gl={{ antialias: false, powerPreference: 'low-power' }}
-      className="w-full h-full pointer-events-none"
+      className="w-full h-full"
     >
-      <ambientLight intensity={0.55} />
-      <directionalLight position={[6, 4, 4]} intensity={1.6} />
-      <directionalLight position={[-4, -3, -3]} intensity={0.25} color="#22d3ee" />
+      <ambientLight intensity={0.65} />
+      <directionalLight position={[5, 3, 5]} intensity={1.5} />
+      <directionalLight
+        position={[-5, -3, -3]}
+        intensity={0.25}
+        color={isMars ? '#C97B5A' : '#B8BEC6'}
+      />
       <ProceduralPlanet body={body} />
       <Starfield />
     </Canvas>

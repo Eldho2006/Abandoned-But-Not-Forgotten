@@ -11,20 +11,39 @@ export default {
         sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
       },
       colors: {
-        navy: {
-          950: '#030712',
-          900: '#0b1120',
-          800: '#151f38',
-          700: '#1e293b',
+        bg: {
+          DEFAULT: '#0B0F14',
+          dark: '#080C10',
         },
-        space: {
-          cyan: '#22d3ee',
-          cyanDark: '#06b6d4',
+        surface: {
+          DEFAULT: '#121821',
+          alt: '#161F2B',
         },
-        mars: {
-          light: '#fb923c',
-          DEFAULT: '#f97316',
-          dark: '#ea580c',
+        border: {
+          DEFAULT: '#222B37',
+          hover: '#313D4D',
+        },
+        ivory: {
+          DEFAULT: '#EDE8DC',
+          dim: '#DCD6C8',
+        },
+        muted: {
+          DEFAULT: '#9AA3AE',
+        },
+        brass: {
+          DEFAULT: '#C9A96E',
+          hover: '#D8BC84',
+          dark: '#A8874E',
+        },
+        terracotta: {
+          DEFAULT: '#C97B5A',
+          hover: '#D88E6F',
+          dark: '#AB6142',
+        },
+        silver: {
+          DEFAULT: '#B8BEC6',
+          hover: '#CCD2DA',
+          dark: '#9FA6AF',
         },
       },
       maxWidth: {

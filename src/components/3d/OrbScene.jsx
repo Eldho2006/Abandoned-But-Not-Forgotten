@@ -3,9 +3,9 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
 
 const HIGHLIGHTS = {
-  18: { id: 'opportunity', name: 'Opportunity', color: '#f97316' },
-  28: { id: 'apollo11-eagle', name: 'Apollo 11 Eagle', color: '#22d3ee' },
-  38: { id: 'sojourner', name: 'Sojourner', color: '#fb923c' },
+  18: { id: 'opportunity', name: 'Opportunity', color: '#C9A96E' },
+  28: { id: 'apollo11-eagle', name: 'Apollo 11 Eagle', color: '#C9A96E' },
+  38: { id: 'sojourner', name: 'Sojourner', color: '#C9A96E' },
 };
 
 function createPlateTexture(name, isHigh, color) {
@@ -13,22 +13,22 @@ function createPlateTexture(name, isHigh, color) {
   const canvas = document.createElement('canvas');
   canvas.width = 256; canvas.height = 140;
   const ctx = canvas.getContext('2d');
-  ctx.fillStyle = isHigh ? '#081226' : '#070d19';
+  ctx.fillStyle = isHigh ? '#161F2B' : '#121821';
   if (ctx.roundRect) {
     ctx.beginPath(); ctx.roundRect(4, 4, 248, 132, 10); ctx.fill();
-    ctx.lineWidth = isHigh ? 6 : 2; ctx.strokeStyle = isHigh ? color || '#22d3ee' : '#1e293b'; ctx.stroke();
+    ctx.lineWidth = isHigh ? 5 : 1.5; ctx.strokeStyle = isHigh ? color || '#C9A96E' : '#222B37'; ctx.stroke();
   } else {
     ctx.fillRect(4, 4, 248, 132);
-    ctx.lineWidth = isHigh ? 6 : 2; ctx.strokeStyle = isHigh ? color || '#22d3ee' : '#1e293b'; ctx.strokeRect(4, 4, 248, 132);
+    ctx.lineWidth = isHigh ? 5 : 1.5; ctx.strokeStyle = isHigh ? color || '#C9A96E' : '#222B37'; ctx.strokeRect(4, 4, 248, 132);
   }
   if (isHigh && name) {
-    ctx.fillStyle = color || '#22d3ee'; ctx.fillRect(20, 20, 216, 3);
-    ctx.fillStyle = '#ffffff'; ctx.font = 'bold 22px system-ui, sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillStyle = color || '#C9A96E'; ctx.fillRect(20, 20, 216, 2.5);
+    ctx.fillStyle = '#EDE8DC'; ctx.font = 'bold 22px serif, Georgia, sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
     ctx.fillText(name, 128, 68);
-    ctx.fillStyle = color || '#22d3ee'; ctx.font = 'bold 12px system-ui, sans-serif';
+    ctx.fillStyle = color || '#C9A96E'; ctx.font = 'bold 11px system-ui, sans-serif';
     ctx.fillText('CLICK TO OPEN STORY →', 128, 106);
   } else {
-    ctx.fillStyle = '#1e293b'; ctx.fillRect(24, 24, 30, 4); ctx.fillRect(60, 24, 48, 4);
+    ctx.fillStyle = '#222B37'; ctx.fillRect(24, 24, 30, 3); ctx.fillRect(60, 24, 48, 3);
   }
   const texture = new THREE.CanvasTexture(canvas);
   texture.needsUpdate = true;
@@ -65,7 +65,7 @@ function Panel({ pos, normal, quat, highlight, onSelect, dragRef }) {
       }}
     >
       <planeGeometry args={[0.56, 0.32]} />
-      <meshStandardMaterial map={texture} roughness={0.4} metalness={0.2} transparent opacity={isHigh ? 0.98 : 0.65} side={THREE.DoubleSide} />
+      <meshStandardMaterial map={texture} roughness={0.5} metalness={0.15} transparent opacity={isHigh ? 0.98 : 0.65} side={THREE.DoubleSide} />
     </mesh>
   );
 }
@@ -135,7 +135,7 @@ function SphereOfPlates({ onSelect }) {
     <group ref={groupRef} rotation={[0.2, 0.4, 0]}>
       <mesh>
         <sphereGeometry args={[2.22, 24, 24]} />
-        <meshBasicMaterial color="#040814" />
+        <meshBasicMaterial color="#0B0F14" />
       </mesh>
       {panels.map((p) => (
         <Panel key={p.id} pos={p.pos} normal={p.normal} quat={p.quat} highlight={p.highlight} onSelect={onSelect} dragRef={dragRef} />
@@ -155,7 +155,7 @@ export default function OrbScene({ onSelectStory, isTabVisible = true }) {
     >
       <ambientLight intensity={0.7} />
       <directionalLight position={[5, 5, 5]} intensity={1.4} />
-      <directionalLight position={[-5, -4, -4]} intensity={0.4} color="#22d3ee" />
+      <directionalLight position={[-5, -4, -4]} intensity={0.3} color="#C9A96E" />
       <SphereOfPlates onSelect={onSelectStory} />
     </Canvas>
   );

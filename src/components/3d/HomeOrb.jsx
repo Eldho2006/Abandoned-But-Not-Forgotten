@@ -23,14 +23,14 @@ function CssOrbFallback() {
       aria-hidden="true"
       className="w-full h-full flex items-center justify-center pointer-events-none select-none"
     >
-      <div className="relative w-64 h-64 sm:w-80 sm:h-80 rounded-full flex items-center justify-center border border-space-cyan/20 shadow-[0_0_80px_rgba(34,211,238,0.15)] bg-gradient-to-br from-navy-900/80 via-navy-950 to-space-black">
-        <div className="absolute inset-4 rounded-full border border-dashed border-space-cyan/30" />
-        <div className="absolute inset-12 rounded-full border border-slate-700/50" />
+      <div className="relative w-64 h-64 sm:w-80 sm:h-80 rounded-full flex items-center justify-center border border-border shadow-[0_0_50px_rgba(201,169,110,0.08)] bg-gradient-to-br from-surface via-surface-alt to-bg">
+        <div className="absolute inset-4 rounded-full border border-dashed border-border" />
+        <div className="absolute inset-12 rounded-full border border-border" />
         <div className="text-center p-4">
-          <div className="font-serif text-slate-300 text-lg sm:text-xl font-normal">
+          <div className="font-serif text-ivory text-lg sm:text-xl font-normal">
             Echoes of Space
           </div>
-          <div className="text-xs text-space-cyan uppercase tracking-wider font-semibold mt-1">
+          <div className="text-xs text-brass uppercase tracking-wider font-semibold mt-1">
             Archival Spheres
           </div>
         </div>
