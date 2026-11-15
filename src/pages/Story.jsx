@@ -7,6 +7,7 @@ import ThenNow from '../components/ThenNow';
 import DustStormChart from '../components/DustStormChart';
 import ChartErrorBoundary from '../components/ChartErrorBoundary';
 import StoryPlanetBackground from '../components/3d/StoryPlanetBackground';
+import MissionCertificateSection from '../components/MissionCertificateSection';
 import { fetchAndParseDustStormData } from '../lib/parseCsv';
 
 export default function Story() {
@@ -148,6 +149,8 @@ export default function Story() {
             </p>
           </div>
         </section>
+
+        <MissionCertificateSection story={story} />
 
         {isDebug && story.verifyNotes && (
           <aside
