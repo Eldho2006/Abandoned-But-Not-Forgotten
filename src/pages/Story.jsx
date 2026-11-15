@@ -1,13 +1,14 @@
 import { useState, useEffect, Fragment } from 'react';
-import { useParams, useSearchParams, Link, Navigate } from 'react-router-dom';
-import storiesData from '../data/stories.json';
-import ChapterBlock from '../components/ChapterBlock';
+import { useParams, Link, Navigate, useSearchParams } from 'react-router-dom';
+import StoryPlanetBackground from '../components/3d/StoryPlanetBackground';
 import Timeline from '../components/Timeline';
-import ThenNow from '../components/ThenNow';
+import ChapterBlock from '../components/ChapterBlock';
 import DustStormChart from '../components/DustStormChart';
 import ChartErrorBoundary from '../components/ChartErrorBoundary';
-import StoryPlanetBackground from '../components/3d/StoryPlanetBackground';
+import ThenNow from '../components/ThenNow';
 import MissionCertificateSection from '../components/MissionCertificateSection';
+import Glass from '../components/ui/Glass';
+import storiesData from '../data/stories.json';
 import { fetchAndParseDustStormData } from '../lib/parseCsv';
 
 export default function Story() {
@@ -45,18 +46,17 @@ export default function Story() {
           if (!isNaN(index)) setActiveChapter(index);
         }
       });
-    }, { rootMargin: '-20% 0px -60% 0px', threshold: 0.1 });
+    }, { rootMargin: '-20% 0px -60% 0px' });
 
     story.chapters.forEach((_, idx) => {
       const el = document.getElementById(`chapter-${idx}`);
       if (el) observer.observe(el);
     });
+
     return () => observer.disconnect();
   }, [story]);
 
-  if (!story) {
-    return <Navigate to="/" replace />;
-  }
+  if (!story) return <Navigate to="/" replace />;
 
   const isMoon = story.planet === 'Moon';
   const targetBody = isMoon ? 'moon' : 'mars';
@@ -72,22 +72,23 @@ export default function Story() {
 
   return (
     <div className="relative min-h-screen text-ivory flex flex-col font-sans">
-      {/* Scroll-driven 3D background matching body (Mars / Moon) */}
       <StoryPlanetBackground body={targetBody} activeChapter={activeChapter} />
 
       <header className="w-full border-b border-border bg-bg/85 backdrop-blur-md sticky top-0 z-30">
-        <div className="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
+        <div className="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
           <Link
             to="/"
             className="text-sm sm:text-base font-bold text-brass hover:text-brass-hover transition-colors flex items-center gap-1.5 focus-visible:underline"
           >
             &larr; Back to all stories
           </Link>
-          <div className="flex items-center gap-4 text-xs sm:text-sm font-semibold text-muted">
-            <Link to="/compare" className="hover:text-brass transition-colors">Compare</Link>
-            <Link to="/quiz" className="hover:text-brass transition-colors">Quiz</Link>
-            <Link to="/sources" className="hover:text-brass transition-colors">Sources</Link>
-          </div>
+          <nav aria-label="Story navigation">
+            <Glass variant="pill" contentClassName="flex items-center gap-3 sm:gap-6 px-4 py-1.5 text-xs sm:text-sm font-semibold">
+              <Link to="/compare" className="text-muted hover:text-brass transition-colors">Compare</Link>
+              <Link to="/quiz" className="text-muted hover:text-brass transition-colors">Quiz</Link>
+              <Link to="/sources" className="text-muted hover:text-brass transition-colors">Sources</Link>
+            </Glass>
+          </nav>
         </div>
       </header>
 
@@ -98,13 +99,15 @@ export default function Story() {
       />
 
       <main className="flex-1 max-w-4xl mx-auto w-full px-4 py-12 sm:py-20 space-y-12 sm:space-y-16">
-        {/* Story Header */}
         <section className="text-center max-w-2xl mx-auto py-4">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 mb-4 rounded-full bg-surface border border-border text-xs sm:text-sm font-semibold text-muted">
+          <Glass
+            variant="chip"
+            contentClassName="inline-flex items-center gap-2 px-3.5 py-1 mb-4 text-xs sm:text-sm font-semibold text-muted"
+          >
             <span className={isMoon ? 'text-silver' : 'text-terracotta'}>{story.planet}</span>
             <span>&bull;</span>
             <span>{story.mission}</span>
-          </div>
+          </Glass>
           <h1 className="font-serif text-4xl sm:text-6xl md:text-7xl font-normal text-ivory tracking-tight leading-[1.08] mb-4">
             {story.name}
           </h1>
@@ -113,7 +116,6 @@ export default function Story() {
           </p>
         </section>
 
-        {/* Chapters */}
         <section aria-label="Story Chapters" className="space-y-10 sm:space-y-14">
           {story.chapters.map((chapter, idx) => (
             <Fragment key={chapter.title || idx}>
@@ -139,7 +141,7 @@ export default function Story() {
           />
         </section>
 
-        <section className="p-6 sm:p-10 rounded-2xl bg-surface/90 border border-border shadow-xl">
+        <Glass variant="panel" className="p-6 sm:p-10">
           <div className="max-w-[65ch] mx-auto">
             <span className="text-xs font-bold uppercase tracking-wider text-brass block mb-2">
               Big Picture
@@ -151,7 +153,7 @@ export default function Story() {
               {story.whyItMatters}
             </p>
           </div>
-        </section>
+        </Glass>
 
         <MissionCertificateSection story={story} />
 

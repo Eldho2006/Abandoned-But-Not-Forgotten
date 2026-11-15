@@ -1,31 +1,39 @@
 import { Link } from 'react-router-dom';
 import StoryCard from '../components/StoryCard';
 import HomeOrb from '../components/3d/HomeOrb';
+import Glass from '../components/ui/Glass';
 import storiesData from '../data/stories.json';
-import { ui } from '../styles/theme';
 
 export default function Home() {
   return (
-    <div className="star-field min-h-screen text-ivory flex flex-col font-sans">
+    <div className="star-field min-h-screen text-ivory flex flex-col font-sans relative overflow-x-hidden">
+      {/* Soft background ambient glows for glass refraction */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 w-[720px] h-[480px] bg-[radial-gradient(ellipse_at_center,_rgba(201,169,110,0.08)_0%,_rgba(201,123,90,0.05)_45%,_transparent_70%)] blur-3xl"
+      />
+
       {/* Top Navigation */}
       <header className="w-full border-b border-border bg-bg/85 backdrop-blur-md sticky top-0 z-20">
-        <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+        <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
           <Link
             to="/"
             className="font-serif text-2xl sm:text-3xl font-normal tracking-tight text-ivory hover:text-brass transition-colors"
           >
             Echoes of Space
           </Link>
-          <nav className="flex items-center gap-4 sm:gap-8 text-sm sm:text-base font-semibold">
-            <Link to="/compare" className="text-muted hover:text-brass transition-colors rounded px-1">
-              Compare
-            </Link>
-            <Link to="/quiz" className="text-muted hover:text-brass transition-colors rounded px-1">
-              Quiz
-            </Link>
-            <Link to="/sources" className="text-muted hover:text-brass transition-colors rounded px-1">
-              Sources
-            </Link>
+          <nav aria-label="Main navigation">
+            <Glass variant="pill" contentClassName="flex items-center gap-3 sm:gap-6 px-4 py-1.5 text-xs sm:text-sm font-semibold">
+              <Link to="/compare" className="text-muted hover:text-brass transition-colors rounded px-1 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-brass">
+                Compare
+              </Link>
+              <Link to="/quiz" className="text-muted hover:text-brass transition-colors rounded px-1 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-brass">
+                Quiz
+              </Link>
+              <Link to="/sources" className="text-muted hover:text-brass transition-colors rounded px-1 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-brass">
+                Sources
+              </Link>
+            </Glass>
           </nav>
         </div>
       </header>
@@ -67,12 +75,22 @@ export default function Home() {
           <p className="text-sm text-muted mb-4 font-medium">
             Want to see all three side-by-side or test your knowledge?
           </p>
-          <div className="flex flex-wrap justify-center gap-3">
-            <Link to="/compare" className={ui.buttonSecondary}>
-              Compare All Three Machines
+          <div className="flex flex-wrap justify-center gap-4">
+            <Link
+              to="/compare"
+              className="rounded-xl inline-block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-bg focus-visible:ring-brass"
+            >
+              <Glass variant="button" contentClassName="px-6 py-3 font-semibold text-ivory hover:text-brass transition-colors">
+                Compare All Three Machines
+              </Glass>
             </Link>
-            <Link to="/quiz" className={ui.buttonSecondary}>
-              Take the Space Quiz
+            <Link
+              to="/quiz"
+              className="rounded-xl inline-block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-bg focus-visible:ring-brass"
+            >
+              <Glass variant="button" contentClassName="px-6 py-3 font-semibold text-ivory hover:text-brass transition-colors">
+                Take the Space Quiz
+              </Glass>
             </Link>
           </div>
         </section>

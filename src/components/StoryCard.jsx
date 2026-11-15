@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
-import { ui } from '../styles/theme';
+import Glass from './ui/Glass';
 
 function PlanetIcon({ planet }) {
   if (planet === 'Mars') {
     return (
       <svg
-        className="w-8 h-8 text-terracotta flex-shrink-0"
+        className="w-5 h-5 text-terracotta flex-shrink-0"
         viewBox="0 0 24 24"
         fill="currentColor"
         role="img"
@@ -25,7 +25,7 @@ function PlanetIcon({ planet }) {
 
   return (
     <svg
-      className="w-8 h-8 text-silver flex-shrink-0"
+      className="w-5 h-5 text-silver flex-shrink-0"
       viewBox="0 0 24 24"
       fill="currentColor"
       role="img"
@@ -44,19 +44,21 @@ export default function StoryCard({ story }) {
   const isMars = story.planet === 'Mars';
 
   return (
-    <article className={`${ui.card} ${ui.cardHover} flex flex-col justify-between group p-6 sm:p-8`}>
+    <Glass
+      variant="panel"
+      className="flex flex-col justify-between group p-6 sm:p-8 hover:border-brass/50 transition-all duration-200"
+    >
       <div>
         <div className="flex items-center justify-between gap-3 mb-5">
-          <div className="flex items-center gap-2.5">
+          <Glass
+            variant="chip"
+            contentClassName={`px-2.5 py-1 text-xs font-bold tracking-wider uppercase flex items-center gap-1.5 ${
+              isMars ? 'text-terracotta' : 'text-silver'
+            }`}
+          >
             <PlanetIcon planet={story.planet} />
-            <span
-              className={`text-xs sm:text-sm font-bold tracking-wider uppercase ${
-                isMars ? 'text-terracotta' : 'text-silver'
-              }`}
-            >
-              {story.planet}
-            </span>
-          </div>
+            <span>{story.planet}</span>
+          </Glass>
           <span className="text-xs px-3 py-1 bg-surface-alt text-muted rounded-full font-medium border border-border">
             {story.mission}
           </span>
@@ -74,12 +76,17 @@ export default function StoryCard({ story }) {
       <div className="pt-2">
         <Link
           to={`/story/${story.id}`}
-          className={`${ui.buttonPrimary} w-full text-base sm:text-lg`}
+          className="w-full inline-block rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-bg focus-visible:ring-brass"
           aria-label={`Hear the story of ${story.name}`}
         >
-          Hear its story &rarr;
+          <Glass
+            variant="button"
+            contentClassName="w-full py-3 px-6 flex items-center justify-center font-bold text-base sm:text-lg text-ivory group-hover:text-brass transition-colors gap-2"
+          >
+            Hear its story &rarr;
+          </Glass>
         </Link>
       </div>
-    </article>
+    </Glass>
   );
 }

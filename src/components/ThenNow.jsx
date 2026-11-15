@@ -1,7 +1,9 @@
+import Glass from './ui/Glass';
+
 export default function ThenNow({ plannedLifespan, actualLifespan, endEvent }) {
   if (!plannedLifespan) {
     return (
-      <div className="p-6 sm:p-8 rounded-2xl bg-surface/90 border border-border shadow-xl">
+      <Glass variant="panel" className="p-6 sm:p-8">
         <div className="flex items-center gap-2 mb-3">
           <span className="text-xs font-bold uppercase tracking-wider text-terracotta">
             Mission Legacy
@@ -25,12 +27,12 @@ export default function ThenNow({ plannedLifespan, actualLifespan, endEvent }) {
             This machine was intentionally designed to stay behind as a permanent base and historical artifact.
           </p>
         </div>
-      </div>
+      </Glass>
     );
   }
 
   return (
-    <div className="p-6 sm:p-8 rounded-2xl bg-surface/90 border border-border shadow-xl">
+    <Glass variant="panel" className="p-6 sm:p-8">
       <div className="flex items-center justify-between gap-2 mb-2">
         <span className="text-xs font-bold uppercase tracking-wider text-brass">
           Then vs Now
@@ -90,6 +92,6 @@ export default function ThenNow({ plannedLifespan, actualLifespan, endEvent }) {
           {endEvent}
         </div>
       )}
-    </div>
+    </Glass>
   );
 }

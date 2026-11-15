@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import HeroPlanet from '../components/3d/HeroPlanet';
-import SceneErrorBoundary from '../components/3d/SceneErrorBoundary';
-import { LiquidGlass } from '../components/ui/liquid-glass';
+import Glass from '../components/ui/Glass';
 import StackedMissionCards from '../components/StackedMissionCards';
 import CompareTable from '../components/CompareTable';
 import storiesData from '../data/stories.json';
@@ -22,25 +21,33 @@ export default function Compare() {
   }));
 
   return (
-    <div className="star-field min-h-screen text-ivory flex flex-col font-sans">
+    <div className="star-field min-h-screen text-ivory flex flex-col font-sans relative overflow-x-hidden">
+      {/* Soft background ambient glows for glass refraction */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 w-[720px] h-[480px] bg-[radial-gradient(ellipse_at_center,_rgba(201,169,110,0.08)_0%,_rgba(201,123,90,0.05)_45%,_transparent_70%)] blur-3xl"
+      />
+
       <header className="w-full border-b border-border bg-bg/85 backdrop-blur-md sticky top-0 z-30">
-        <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+        <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
           <Link
             to="/"
             className="font-serif text-2xl sm:text-3xl font-normal tracking-tight text-ivory hover:text-brass transition-colors"
           >
             Echoes of Space
           </Link>
-          <nav className="flex items-center gap-4 sm:gap-8 text-sm sm:text-base font-semibold">
-            <Link to="/" className="text-muted hover:text-brass transition-colors rounded px-1">
-              Home
-            </Link>
-            <Link to="/quiz" className="text-muted hover:text-brass transition-colors rounded px-1">
-              Quiz
-            </Link>
-            <Link to="/sources" className="text-muted hover:text-brass transition-colors rounded px-1">
-              Sources
-            </Link>
+          <nav aria-label="Main navigation">
+            <Glass variant="pill" contentClassName="flex items-center gap-3 sm:gap-6 px-4 py-1.5 text-xs sm:text-sm font-semibold">
+              <Link to="/" className="text-muted hover:text-brass transition-colors rounded px-1">
+                Home
+              </Link>
+              <Link to="/quiz" className="text-muted hover:text-brass transition-colors rounded px-1">
+                Quiz
+              </Link>
+              <Link to="/sources" className="text-muted hover:text-brass transition-colors rounded px-1">
+                Sources
+              </Link>
+            </Glass>
           </nav>
         </div>
       </header>
@@ -61,51 +68,26 @@ export default function Compare() {
               Opportunity and Sojourner explored the plains of Mars while Apollo 11 Eagle landed on the Moon, each leaving their mark behind when their missions ended.
             </p>
 
-            <SceneErrorBoundary
-              fallback={
-                <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
-                  <span className="inline-flex items-center px-3.5 py-1.5 text-xs sm:text-sm font-medium text-ivory rounded-full bg-surface/90 border border-border">
-                    3 machines
-                  </span>
-                  <span className="inline-flex items-center px-3.5 py-1.5 text-xs sm:text-sm font-medium text-ivory rounded-full bg-surface/90 border border-border">
-                    2 worlds
-                  </span>
-                  <span className="inline-flex items-center px-3.5 py-1.5 text-xs sm:text-sm font-medium text-ivory rounded-full bg-surface/90 border border-border">
-                    1 question: why did they stop?
-                  </span>
-                </div>
-              }
-            >
-              <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
-                <LiquidGlass
-                  tint={0.14}
-                  scale={16}
-                  bevelDepth={8}
-                  aberration={1}
-                  contentClassName="px-3.5 py-1.5 text-xs sm:text-sm font-medium text-ivory"
-                >
-                  3 machines
-                </LiquidGlass>
-                <LiquidGlass
-                  tint={0.14}
-                  scale={16}
-                  bevelDepth={8}
-                  aberration={1}
-                  contentClassName="px-3.5 py-1.5 text-xs sm:text-sm font-medium text-ivory"
-                >
-                  2 worlds
-                </LiquidGlass>
-                <LiquidGlass
-                  tint={0.14}
-                  scale={16}
-                  bevelDepth={8}
-                  aberration={1}
-                  contentClassName="px-3.5 py-1.5 text-xs sm:text-sm font-medium text-ivory"
-                >
-                  1 question: why did they stop?
-                </LiquidGlass>
-              </div>
-            </SceneErrorBoundary>
+            <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
+              <Glass
+                variant="chip"
+                contentClassName="px-3.5 py-1.5 text-xs sm:text-sm font-medium text-ivory"
+              >
+                3 machines
+              </Glass>
+              <Glass
+                variant="chip"
+                contentClassName="px-3.5 py-1.5 text-xs sm:text-sm font-medium text-ivory"
+              >
+                2 worlds
+              </Glass>
+              <Glass
+                variant="chip"
+                contentClassName="px-3.5 py-1.5 text-xs sm:text-sm font-medium text-ivory"
+              >
+                1 question: why did they stop?
+              </Glass>
+            </div>
           </div>
         </section>
 

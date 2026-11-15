@@ -11,6 +11,7 @@ import {
 } from 'recharts';
 import { getSolCaption } from '../lib/parseCsv';
 import { palette } from '../styles/theme';
+import Glass from './ui/Glass';
 
 function EnergyDot({ cx, cy, payload }) {
   if (cx == null || cy == null || payload?.energy == null) return null;
@@ -68,17 +69,17 @@ export default function DustStormChart({ data = [], loading = false, error = nul
   const captionText = getSolCaption(selectedItem);
 
   return (
-    <section aria-label="Dust storm data chart" className="p-4 sm:p-7 rounded-2xl bg-surface/95 border border-border shadow-2xl space-y-5">
+    <Glass variant="panel" aria-label="Dust storm data chart" className="p-4 sm:p-7 space-y-5">
       <div>
         <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
           <span className="text-xs font-bold uppercase tracking-wider text-brass">Real NASA Data</span>
           <div className="flex flex-wrap gap-2 text-[11px] font-semibold">
-            <span className="px-2.5 py-1 rounded-md bg-surface-alt text-brass border border-border">
+            <Glass variant="chip" contentClassName="px-2.5 py-1 text-brass font-semibold">
               Tau: NASA PDS Geosciences Node (MER Pancam)
-            </span>
-            <span className="px-2.5 py-1 rounded-md bg-surface-alt text-ivory border border-border">
+            </Glass>
+            <Glass variant="chip" contentClassName="px-2.5 py-1 text-ivory font-semibold">
               Energy and final point: NASA/JPL status reports
-            </span>
+            </Glass>
           </div>
         </div>
         <h3 className="text-xl sm:text-2xl font-black text-ivory">Why Opportunity Went Silent (2018 Dust Storm)</h3>
@@ -133,6 +134,6 @@ export default function DustStormChart({ data = [], loading = false, error = nul
       <p className="text-xs text-center text-muted italic">
         Small differences between sources come from calibration.
       </p>
-    </section>
+    </Glass>
   );
 }

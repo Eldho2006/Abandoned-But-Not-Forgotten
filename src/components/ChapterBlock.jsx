@@ -1,13 +1,15 @@
 import ListenButton from './ListenButton';
 import AiLabel from './AiLabel';
+import Glass from './ui/Glass';
 
 export default function ChapterBlock({ chapter, index, id }) {
   if (!chapter) return null;
 
   return (
-    <article
+    <Glass
+      variant="panel"
       id={id || `chapter-${index}`}
-      className="scroll-mt-28 p-6 sm:p-10 rounded-2xl bg-surface/90 border border-border shadow-xl transition-all duration-300 hover:border-border-hover motion-safe:animate-fadeIn"
+      className="scroll-mt-28 p-6 sm:p-10 motion-safe:animate-fadeIn"
     >
       <div className="max-w-[65ch] mx-auto">
         <div className="flex items-center gap-3 mb-4">
@@ -44,6 +46,6 @@ export default function ChapterBlock({ chapter, index, id }) {
         {/* Speech Narration & Captions */}
         <ListenButton text={chapter.text} title={chapter.title} />
       </div>
-    </article>
+    </Glass>
   );
 }

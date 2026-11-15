@@ -1,19 +1,28 @@
 import { Link } from 'react-router-dom';
 import AiLabel from '../components/AiLabel';
 import MissionArchiveFolders from '../components/MissionArchiveFolders';
+import Glass from '../components/ui/Glass';
 
 export default function Sources() {
   return (
-    <div className="star-field min-h-screen text-ivory flex flex-col font-sans">
+    <div className="star-field min-h-screen text-ivory flex flex-col font-sans relative overflow-x-hidden">
+      {/* Soft background ambient glows for glass refraction */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 w-[720px] h-[480px] bg-[radial-gradient(ellipse_at_center,_rgba(201,169,110,0.08)_0%,_rgba(201,123,90,0.05)_45%,_transparent_70%)] blur-3xl"
+      />
+
       <header className="w-full border-b border-border bg-bg/85 backdrop-blur-md sticky top-0 z-30">
-        <div className="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
+        <div className="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
           <Link to="/" className="text-sm sm:text-base font-bold text-brass hover:text-brass-hover transition-colors flex items-center gap-1.5 focus-visible:underline">
             &larr; Back to Home
           </Link>
-          <div className="flex items-center gap-4 text-xs sm:text-sm font-semibold text-muted">
-            <Link to="/compare" className="hover:text-brass transition-colors">Compare</Link>
-            <Link to="/quiz" className="hover:text-brass transition-colors">Quiz</Link>
-          </div>
+          <nav aria-label="Main navigation">
+            <Glass variant="pill" contentClassName="flex items-center gap-3 sm:gap-6 px-4 py-1.5 text-xs sm:text-sm font-semibold">
+              <Link to="/compare" className="text-muted hover:text-brass transition-colors">Compare</Link>
+              <Link to="/quiz" className="text-muted hover:text-brass transition-colors">Quiz</Link>
+            </Glass>
+          </nav>
         </div>
       </header>
 
@@ -33,10 +42,10 @@ export default function Sources() {
         <section aria-labelledby="sources-heading" className="space-y-6">
           <h2 id="sources-heading" className="font-serif text-2xl sm:text-3xl font-normal text-ivory border-b border-border pb-2">Data Sources</h2>
           <div className="space-y-5">
-            <article className="p-6 sm:p-7 rounded-2xl bg-surface/90 border border-border space-y-2.5 shadow-lg">
+            <Glass variant="panel" className="p-6 sm:p-7 space-y-2.5">
               <div className="flex flex-wrap items-baseline justify-between gap-2">
                 <h3 className="font-serif text-xl sm:text-2xl font-normal text-ivory">NASA PDS MER Pancam Derived Atmospheric Opacity Collection</h3>
-                <span className="text-xs px-2.5 py-0.5 rounded-full bg-surface-alt text-muted border border-border">ID PSPG-01754 / PSPG-01753</span>
+                <Glass variant="chip" contentClassName="text-xs px-2.5 py-0.5 text-muted">ID PSPG-01754 / PSPG-01753</Glass>
               </div>
               <p className="text-xs sm:text-sm text-muted leading-relaxed max-w-[65ch]">
                 Atmospheric opacity (tau, 880 nm) measured by Opportunity&apos;s Pancam from Jan 27, 2004 to June 5, 2018 (8,639 rows). Cite as: NASA PDS Geosciences Node, &ldquo;MER1/MER2-M-PANCAM-5-ATMOS-OPACITY-V1.0&rdquo;.
@@ -49,9 +58,9 @@ export default function Sources() {
                   PDS Geosciences Node Data Folder &rarr;
                 </a>
               </div>
-            </article>
+            </Glass>
 
-            <article className="p-6 sm:p-7 rounded-2xl bg-surface/90 border border-border space-y-2.5 shadow-lg">
+            <Glass variant="panel" className="p-6 sm:p-7 space-y-2.5">
               <h3 className="font-serif text-xl sm:text-2xl font-normal text-ivory">JPL Opportunity Mission Status Reports &amp; Graphics</h3>
               <p className="text-xs sm:text-sm text-muted leading-relaxed max-w-[65ch]">
                 Daily solar energy production (watt-hours) and storm updates, including sol 5111 final readings (22 Wh, tau 10.8).
@@ -67,9 +76,9 @@ export default function Sources() {
                   Photojournal PIA22930 &rarr;
                 </a>
               </div>
-            </article>
+            </Glass>
 
-            <article className="p-6 sm:p-7 rounded-2xl bg-surface/90 border border-border space-y-2.5 shadow-lg">
+            <Glass variant="panel" className="p-6 sm:p-7 space-y-2.5">
               <h3 className="font-serif text-xl sm:text-2xl font-normal text-ivory">NASA Spirit and Opportunity Mission Overview</h3>
               <p className="text-xs sm:text-sm text-muted leading-relaxed max-w-[65ch]">
                 Official mission overview for landings (Spirit Jan 3, 2004; Opportunity Jan 24, 2004), last contact June 10, 2018, 28.06 mi (45.16 km) driven, and driving record.
@@ -79,9 +88,9 @@ export default function Sources() {
                   NASA Mars Exploration Rovers Page &rarr;
                 </a>
               </div>
-            </article>
+            </Glass>
 
-            <article className="p-6 sm:p-7 rounded-2xl bg-surface/90 border border-border space-y-2.5 shadow-lg">
+            <Glass variant="panel" className="p-6 sm:p-7 space-y-2.5">
               <h3 className="font-serif text-xl sm:text-2xl font-normal text-ivory">NASA Apollo 11 Mission Overview</h3>
               <p className="text-xs sm:text-sm text-muted leading-relaxed max-w-[65ch]">
                 Official Apollo 11 mission documentation, launch July 16, 1969, landing July 20, 1969, lunar module Eagle descent stage details, and laser ranging retroreflector experiment.
@@ -91,9 +100,9 @@ export default function Sources() {
                   NASA Apollo 11 Mission Page &rarr;
                 </a>
               </div>
-            </article>
+            </Glass>
 
-            <article className="p-6 sm:p-7 rounded-2xl bg-surface/90 border border-border space-y-2.5 shadow-lg">
+            <Glass variant="panel" className="p-6 sm:p-7 space-y-2.5">
               <h3 className="font-serif text-xl sm:text-2xl font-normal text-ivory">NASA Mars Pathfinder &amp; Sojourner Overview</h3>
               <p className="text-xs sm:text-sm text-muted leading-relaxed max-w-[65ch]">
                 Official mission overview for Mars Pathfinder and the Sojourner rover (launch Dec 4, 1996, landing July 4, 1997, Ares Vallis site, and exploration history).
@@ -103,62 +112,24 @@ export default function Sources() {
                   NASA Mars Pathfinder Page &rarr;
                 </a>
               </div>
-            </article>
-
-            <article className="p-6 sm:p-7 rounded-2xl bg-surface/90 border border-border space-y-2.5 shadow-lg">
-              <h3 className="font-serif text-xl sm:text-2xl font-normal text-ivory">NSSDCA Opportunity Master Catalog Page</h3>
-              <p className="text-xs sm:text-sm text-muted leading-relaxed max-w-[65ch]">
-                NASA Space Science Data Coordinated Archive (craft ID 2003-032A): launch July 8, 2003 UTC (July 7 US Eastern); landing Jan 25, 2004 UTC; site Terra Meridiani; solar arrays up to 140 W; datasets and 2007 dust storm press release.
-              </p>
-              <div className="pt-1 text-xs font-semibold">
-                <a href="https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2003-032A" target="_blank" rel="noreferrer" className="text-brass hover:underline">
-                  NSSDCA Spacecraft ID 2003-032A Record &rarr;
-                </a>
-              </div>
-            </article>
+            </Glass>
           </div>
         </section>
 
-        {/* Image Credits */}
-        <section aria-labelledby="images-heading" className="space-y-4">
-          <h2 id="images-heading" className="font-serif text-2xl sm:text-3xl font-normal text-ivory border-b border-border pb-2">Image Credits</h2>
-          <div className="p-6 sm:p-7 rounded-2xl bg-surface/90 border border-border space-y-3 text-xs sm:text-sm text-muted shadow-lg">
-            <p className="font-semibold text-ivory">Data and images: NASA/JPL-Caltech unless stated.</p>
-            <ul className="list-disc pl-5 space-y-2 text-muted">
-              <li>
-                <strong className="text-ivory">Opportunity Legacy Pan (Sol 5000):</strong> NASA/JPL-Caltech/Cornell/ASU. Pancam true-color mosaic taken near Endeavour Crater.{' '}
-                <a href="https://science.nasa.gov/photojournal/opportunity-legacy-pan-true-color/" target="_blank" rel="noreferrer" className="text-brass hover:underline">
-                  Photojournal Archive &rarr;
-                </a>
-              </li>
-              <li>
-                <strong className="text-ivory">Opportunity Tracks in Perseverance Valley:</strong> NASA/JPL-Caltech/Cornell/ASU. Pancam imaging from upper Perseverance Valley.{' '}
-                <a href="https://science.nasa.gov/photojournal/opportunitys-tracks-in-perseverance-valley/" target="_blank" rel="noreferrer" className="text-brass hover:underline">
-                  Photojournal Archive &rarr;
-                </a>
-              </li>
-            </ul>
-          </div>
-        </section>
-
-        {/* AI Use Disclosure */}
-        <section aria-labelledby="ai-disclosure-heading" className="space-y-4">
-          <h2 id="ai-disclosure-heading" className="font-serif text-2xl sm:text-3xl font-normal text-ivory border-b border-border pb-2">AI Use Disclosure</h2>
-          <div className="p-6 sm:p-7 rounded-2xl bg-surface/90 border border-border space-y-4 text-xs sm:text-sm text-muted shadow-lg">
-            <div className="flex items-center gap-2">
+        {/* AI Disclosure Statement */}
+        <section aria-labelledby="ai-disclosure-heading" className="pt-4 border-t border-border">
+          <Glass variant="panel" className="p-6 sm:p-8 space-y-3">
+            <div className="flex items-center gap-3">
               <AiLabel />
-              <span className="font-bold text-ivory text-sm">Transparency in Generative Technology</span>
+              <h2 id="ai-disclosure-heading" className="font-serif text-2xl font-normal text-ivory">AI Development Disclosure</h2>
             </div>
-            <p className="leading-relaxed">
+            <p className="text-xs sm:text-sm text-muted leading-relaxed max-w-[65ch]">
               This application was developed with the assistance of AI coding tools (<strong className="text-ivory">Google Antigravity</strong>). The narrative stories and interactive quizzes were drafted with AI assistance and verified against primary NASA and JPL sources.
             </p>
-            <div className="p-3.5 rounded-xl bg-bg border border-border text-xs space-y-1">
-              <span className="font-bold text-brass block">Data Integrity Policy:</span>
-              <p>
-                Every numeric measurement (e.g. sol numbers, atmospheric opacity tau readings, watt-hour solar power generation) is strictly queried from published NASA PDS and JPL datasets. No historical data or dates are AI-generated.
-              </p>
-            </div>
-          </div>
+            <p className="text-xs text-muted max-w-[65ch]">
+              AI coding tools were used strictly for scaffolding, formatting, and responsive design assistance. Every historical milestone, scientific measurement, and mission date is grounded exclusively in the cited NASA source materials.
+            </p>
+          </Glass>
         </section>
       </main>
     </div>

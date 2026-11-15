@@ -2,8 +2,7 @@ import { useLayoutEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { LiquidGlass } from './ui/liquid-glass';
-import SceneErrorBoundary from './3d/SceneErrorBoundary';
+import Glass from './ui/Glass';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -71,13 +70,11 @@ export default function StackedMissionCards({ cards }: { cards: MissionCard[] })
             zIndex: 10 + i,
           }}
         >
-          <article
+          <Glass
+            variant="panel"
             data-stack-card
             aria-label={card.title}
-            className="relative overflow-hidden rounded-2xl sm:rounded-3xl border border-border bg-surface/95 p-5 sm:p-10 shadow-2xl transition-transform motion-reduce:transform-none"
-            style={{
-              boxShadow: '0 24px 60px -24px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(237, 232, 220, 0.08)',
-            }}
+            className="p-5 sm:p-10 transition-transform motion-reduce:transform-none"
           >
             <div
               aria-hidden
@@ -85,26 +82,14 @@ export default function StackedMissionCards({ cards }: { cards: MissionCard[] })
               style={{ background: `linear-gradient(90deg, transparent, ${card.accent}, transparent)` }}
             />
 
-            <SceneErrorBoundary
-              fallback={
-                <span className="inline-flex items-center gap-2 px-3 py-1 text-xs tracking-wide text-ivory/90 rounded-full bg-surface border border-border">
-                  <span aria-hidden className="size-2 rounded-full" style={{ background: card.accent }} />
-                  {card.place}
-                </span>
-              }
+            <Glass
+              variant="chip"
+              contentClassName="flex items-center gap-2 px-3 py-1 text-xs tracking-wide text-ivory/90 font-medium"
+              className="inline-block"
             >
-              <LiquidGlass
-                tint={0.12}
-                scale={16}
-                bevelDepth={8}
-                aberration={1}
-                contentClassName="flex items-center gap-2 px-3 py-1 text-xs tracking-wide text-ivory/90 font-medium"
-                className="inline-block"
-              >
-                <span aria-hidden className="size-2 rounded-full" style={{ background: card.accent }} />
-                {card.place}
-              </LiquidGlass>
-            </SceneErrorBoundary>
+              <span aria-hidden className="size-2 rounded-full" style={{ background: card.accent }} />
+              {card.place}
+            </Glass>
 
             <h3 className="mt-4 font-serif text-3xl text-ivory sm:text-4xl font-normal">{card.title}</h3>
             {card.hook ? <p className="mt-2 max-w-prose text-sm sm:text-base text-muted">{card.hook}</p> : null}
@@ -130,25 +115,14 @@ export default function StackedMissionCards({ cards }: { cards: MissionCard[] })
               to={`/story/${card.id}`}
               className="group mt-6 sm:mt-8 inline-block rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-bg focus-visible:ring-brass"
             >
-              <SceneErrorBoundary
-                fallback={
-                  <span className="inline-flex items-center justify-center px-6 py-3 text-sm font-bold text-bg bg-brass rounded-full shadow-md">
-                    Read its story &rarr;
-                  </span>
-                }
+              <Glass
+                variant="button"
+                contentClassName="px-6 py-3 text-sm font-bold text-ivory group-hover:text-brass transition-colors"
               >
-                <LiquidGlass
-                  tint={0.16}
-                  scale={20}
-                  bevelDepth={10}
-                  aberration={2}
-                  contentClassName="px-6 py-3 text-sm font-bold text-ivory group-hover:text-brass transition-colors"
-                >
-                  Read its story &rarr;
-                </LiquidGlass>
-              </SceneErrorBoundary>
+                Read its story &rarr;
+              </Glass>
             </Link>
-          </article>
+          </Glass>
         </div>
       ))}
     </div>

@@ -1,4 +1,5 @@
 import MissionCertificate from './3d/MissionCertificate';
+import Glass from './ui/Glass';
 
 export default function MissionCertificateSection({ story }) {
   return (
@@ -21,7 +22,7 @@ export default function MissionCertificateSection({ story }) {
       </div>
 
       {/* Plain text accessible version: facts never depend on 3D */}
-      <div className="max-w-xl mx-auto p-6 sm:p-8 rounded-2xl bg-surface/90 border border-border shadow-xl space-y-5 text-ivory">
+      <Glass variant="panel" className="max-w-xl mx-auto p-6 sm:p-8 space-y-5 text-ivory">
         <div className="flex items-center justify-between border-b border-border pb-3">
           <div>
             <span className="text-xs font-bold uppercase tracking-wider text-brass block">
@@ -80,7 +81,7 @@ export default function MissionCertificateSection({ story }) {
         <p className="text-xs text-muted italic text-center pt-3 border-t border-border">
           Illustrative card, not an official NASA document.
         </p>
-      </div>
+      </Glass>
     </section>
   );
 }
