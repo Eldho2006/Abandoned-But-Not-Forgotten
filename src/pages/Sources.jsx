@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom';
 import AiLabel from '../components/AiLabel';
+import MissionArchiveFolders from '../components/MissionArchiveFolders';
 
 export default function Sources() {
   return (
     <div className="star-field min-h-screen text-ivory flex flex-col font-sans">
       <header className="w-full border-b border-border bg-bg/85 backdrop-blur-md sticky top-0 z-30">
-        <div className="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
+        <div className="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
           <Link to="/" className="text-sm sm:text-base font-bold text-brass hover:text-brass-hover transition-colors flex items-center gap-1.5 focus-visible:underline">
             &larr; Back to Home
           </Link>
@@ -16,7 +17,7 @@ export default function Sources() {
         </div>
       </header>
 
-      <main className="flex-1 max-w-4xl mx-auto w-full px-4 py-12 sm:py-20 space-y-12 sm:space-y-16">
+      <main className="flex-1 max-w-5xl mx-auto w-full px-4 py-12 sm:py-20 space-y-12 sm:space-y-16">
         <div>
           <span className="text-xs font-semibold uppercase tracking-wider text-brass block mb-2">Transparency &amp; Citations</span>
           <h1 className="font-serif text-4xl sm:text-5xl font-normal text-ivory tracking-tight mb-3">Data Sources &amp; Disclosures</h1>
@@ -25,7 +26,10 @@ export default function Sources() {
           </p>
         </div>
 
-        {/* Primary Data Sources */}
+        {/* Interactive Mission Archive Folders */}
+        <MissionArchiveFolders />
+
+        {/* Primary Data Sources: Plain text list below the folders */}
         <section aria-labelledby="sources-heading" className="space-y-6">
           <h2 id="sources-heading" className="font-serif text-2xl sm:text-3xl font-normal text-ivory border-b border-border pb-2">Data Sources</h2>
           <div className="space-y-5">
@@ -73,6 +77,30 @@ export default function Sources() {
               <div className="pt-1 text-xs font-semibold">
                 <a href="https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/" target="_blank" rel="noreferrer" className="text-brass hover:underline">
                   NASA Mars Exploration Rovers Page &rarr;
+                </a>
+              </div>
+            </article>
+
+            <article className="p-6 sm:p-7 rounded-2xl bg-surface/90 border border-border space-y-2.5 shadow-lg">
+              <h3 className="font-serif text-xl sm:text-2xl font-normal text-ivory">NASA Apollo 11 Mission Overview</h3>
+              <p className="text-xs sm:text-sm text-muted leading-relaxed max-w-[65ch]">
+                Official Apollo 11 mission documentation, launch July 16, 1969, landing July 20, 1969, lunar module Eagle descent stage details, and laser ranging retroreflector experiment.
+              </p>
+              <div className="pt-1 text-xs font-semibold">
+                <a href="https://www.nasa.gov/mission/apollo-11/" target="_blank" rel="noreferrer" className="text-brass hover:underline">
+                  NASA Apollo 11 Mission Page &rarr;
+                </a>
+              </div>
+            </article>
+
+            <article className="p-6 sm:p-7 rounded-2xl bg-surface/90 border border-border space-y-2.5 shadow-lg">
+              <h3 className="font-serif text-xl sm:text-2xl font-normal text-ivory">NASA Mars Pathfinder &amp; Sojourner Overview</h3>
+              <p className="text-xs sm:text-sm text-muted leading-relaxed max-w-[65ch]">
+                Official mission overview for Mars Pathfinder and the Sojourner rover (launch Dec 4, 1996, landing July 4, 1997, Ares Vallis site, and exploration history).
+              </p>
+              <div className="pt-1 text-xs font-semibold">
+                <a href="https://science.nasa.gov/mission/mars-pathfinder/" target="_blank" rel="noreferrer" className="text-brass hover:underline">
+                  NASA Mars Pathfinder Page &rarr;
                 </a>
               </div>
             </article>
