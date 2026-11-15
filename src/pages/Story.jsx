@@ -6,7 +6,7 @@ import Timeline from '../components/Timeline';
 import ThenNow from '../components/ThenNow';
 import DustStormChart from '../components/DustStormChart';
 import ChartErrorBoundary from '../components/ChartErrorBoundary';
-import HeroPlanet from '../components/3d/HeroPlanet';
+import StoryPlanetBackground from '../components/3d/StoryPlanetBackground';
 import { fetchAndParseDustStormData } from '../lib/parseCsv';
 
 export default function Story() {
@@ -70,7 +70,10 @@ export default function Story() {
   };
 
   return (
-    <div className="star-field min-h-screen text-slate-100 flex flex-col font-sans">
+    <div className="relative min-h-screen text-slate-100 flex flex-col font-sans">
+      {/* Scroll-driven 3D background matching body (Mars / Moon) */}
+      <StoryPlanetBackground body={targetBody} activeChapter={activeChapter} />
+
       <header className="w-full border-b border-navy-700 bg-navy-950/80 backdrop-blur-md sticky top-0 z-30">
         <div className="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
           <Link
@@ -94,24 +97,19 @@ export default function Story() {
       />
 
       <main className="flex-1 max-w-4xl mx-auto w-full px-4 py-12 sm:py-20 space-y-12 sm:space-y-16">
-        {/* Story Header with matching 3D celestial body */}
-        <section className="relative text-center max-w-2xl mx-auto py-4">
-          <div className="absolute inset-0 -top-6 flex items-center justify-center opacity-25 sm:opacity-35 -z-10 h-64 sm:h-80">
-            <HeroPlanet body={targetBody} />
+        {/* Story Header */}
+        <section className="text-center max-w-2xl mx-auto py-4">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 mb-4 rounded-full bg-navy-900 border border-navy-700 text-xs sm:text-sm font-semibold text-slate-300">
+            <span className={isMoon ? 'text-slate-300' : 'text-mars-light'}>{story.planet}</span>
+            <span>&bull;</span>
+            <span>{story.mission}</span>
           </div>
-          <div className="relative z-10">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 mb-4 rounded-full bg-navy-900 border border-navy-700 text-xs sm:text-sm font-semibold text-slate-300">
-              <span className={isMoon ? 'text-slate-300' : 'text-mars-light'}>{story.planet}</span>
-              <span>&bull;</span>
-              <span>{story.mission}</span>
-            </div>
-            <h1 className="font-serif text-4xl sm:text-6xl md:text-7xl font-normal text-white tracking-tight leading-[1.08] mb-4">
-              {story.name}
-            </h1>
-            <p className="text-lg sm:text-xl text-slate-300 font-normal italic max-w-[65ch] mx-auto leading-relaxed">
-              &ldquo;{story.hook}&rdquo;
-            </p>
-          </div>
+          <h1 className="font-serif text-4xl sm:text-6xl md:text-7xl font-normal text-white tracking-tight leading-[1.08] mb-4">
+            {story.name}
+          </h1>
+          <p className="text-lg sm:text-xl text-slate-300 font-normal italic max-w-[65ch] mx-auto leading-relaxed">
+            &ldquo;{story.hook}&rdquo;
+          </p>
         </section>
 
         <section aria-label="Story chapters" className="space-y-8 sm:space-y-10">
