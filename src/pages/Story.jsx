@@ -57,7 +57,8 @@ export default function Story() {
 
   if (!story) return <Navigate to="/404" replace />;
 
-  const targetBody = story.planet === 'Moon' ? 'moon' : 'mars';
+  const isMoon = story.planet === 'Moon';
+  const targetBody = isMoon ? 'moon' : 'mars';
 
   const handleSelectChapter = (idx) => {
     setActiveChapter(idx);
@@ -69,9 +70,9 @@ export default function Story() {
   };
 
   return (
-    <div className="star-field min-h-screen text-slate-100 flex flex-col">
+    <div className="star-field min-h-screen text-slate-100 flex flex-col font-sans">
       <header className="w-full border-b border-navy-700 bg-navy-950/80 backdrop-blur-md sticky top-0 z-30">
-        <div className="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
+        <div className="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
           <Link
             to="/"
             className="text-sm sm:text-base font-bold text-space-cyan hover:text-cyan-300 transition-colors flex items-center gap-1.5 focus-visible:underline"
@@ -92,28 +93,28 @@ export default function Story() {
         onSelectChapter={handleSelectChapter}
       />
 
-      <main className="flex-1 max-w-4xl mx-auto w-full px-4 py-8 sm:py-12 space-y-10 sm:space-y-12">
+      <main className="flex-1 max-w-4xl mx-auto w-full px-4 py-12 sm:py-20 space-y-12 sm:space-y-16">
         {/* Story Header with matching 3D celestial body */}
-        <section className="relative text-center max-w-2xl mx-auto py-2">
-          <div className="absolute inset-0 -top-4 flex items-center justify-center opacity-25 sm:opacity-35 -z-10 h-56 sm:h-72">
+        <section className="relative text-center max-w-2xl mx-auto py-4">
+          <div className="absolute inset-0 -top-6 flex items-center justify-center opacity-25 sm:opacity-35 -z-10 h-64 sm:h-80">
             <HeroPlanet body={targetBody} />
           </div>
           <div className="relative z-10">
-            <div className="inline-flex items-center gap-2 px-3 py-1 mb-3 rounded-full bg-navy-900 border border-navy-700 text-xs sm:text-sm font-semibold text-slate-300">
-              <span>{story.planet}</span>
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 mb-4 rounded-full bg-navy-900 border border-navy-700 text-xs sm:text-sm font-semibold text-slate-300">
+              <span className={isMoon ? 'text-slate-300' : 'text-mars-light'}>{story.planet}</span>
               <span>&bull;</span>
               <span>{story.mission}</span>
             </div>
-            <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight mb-4">
+            <h1 className="font-serif text-4xl sm:text-6xl md:text-7xl font-normal text-white tracking-tight leading-[1.08] mb-4">
               {story.name}
             </h1>
-            <p className="text-lg sm:text-xl text-slate-300 font-medium italic">
+            <p className="text-lg sm:text-xl text-slate-300 font-normal italic max-w-[65ch] mx-auto leading-relaxed">
               &ldquo;{story.hook}&rdquo;
             </p>
           </div>
         </section>
 
-        <section aria-label="Story chapters" className="space-y-8">
+        <section aria-label="Story chapters" className="space-y-8 sm:space-y-10">
           {story.chapters.map((chapter, idx) => (
             <Fragment key={chapter.title || idx}>
               <ChapterBlock chapter={chapter} index={idx} id={`chapter-${idx}`} />
@@ -136,16 +137,18 @@ export default function Story() {
           />
         </section>
 
-        <section className="p-6 sm:p-8 rounded-2xl bg-navy-900/90 border border-navy-700/80 shadow-xl">
-          <span className="text-xs font-bold uppercase tracking-wider text-space-cyan block mb-2">
-            Big Picture
-          </span>
-          <h3 className="text-xl sm:text-2xl font-black text-white mb-3">
-            Why it matters
-          </h3>
-          <p className="text-base sm:text-lg text-slate-200 leading-relaxed font-normal max-w-[65ch]">
-            {story.whyItMatters}
-          </p>
+        <section className="p-6 sm:p-10 rounded-2xl bg-navy-900/90 border border-navy-700/80 shadow-xl">
+          <div className="max-w-[65ch] mx-auto">
+            <span className="text-xs font-bold uppercase tracking-wider text-space-cyan block mb-2">
+              Big Picture
+            </span>
+            <h2 className="font-serif text-3xl sm:text-4xl font-normal text-white mb-4 tracking-tight leading-snug">
+              Why it matters
+            </h2>
+            <p className="text-base sm:text-lg text-slate-200 leading-relaxed font-normal">
+              {story.whyItMatters}
+            </p>
+          </div>
         </section>
 
         {isDebug && story.verifyNotes && (
@@ -167,7 +170,7 @@ export default function Story() {
           </aside>
         )}
 
-        <nav className="pt-6 border-t border-navy-700 flex flex-wrap justify-between gap-4 text-sm font-semibold">
+        <nav className="pt-8 border-t border-navy-700 flex flex-wrap justify-between gap-4 text-sm font-semibold">
           <Link to="/" className="text-slate-400 hover:text-white transition-colors">
             &larr; Back to all machines
           </Link>

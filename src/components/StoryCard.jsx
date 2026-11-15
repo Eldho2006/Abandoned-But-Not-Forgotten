@@ -44,9 +44,9 @@ export default function StoryCard({ story }) {
   const isMars = story.planet === 'Mars';
 
   return (
-    <article className={`${ui.card} ${ui.cardHover} flex flex-col justify-between group`}>
+    <article className={`${ui.card} ${ui.cardHover} flex flex-col justify-between group p-6 sm:p-8`}>
       <div>
-        <div className="flex items-center justify-between gap-3 mb-4">
+        <div className="flex items-center justify-between gap-3 mb-5">
           <div className="flex items-center gap-2.5">
             <PlanetIcon planet={story.planet} />
             <span
@@ -57,16 +57,16 @@ export default function StoryCard({ story }) {
               {story.planet}
             </span>
           </div>
-          <span className="text-xs px-2.5 py-1 bg-navy-800 text-slate-300 rounded-full font-medium border border-navy-700">
+          <span className="text-xs px-3 py-1 bg-navy-800 text-slate-300 rounded-full font-medium border border-navy-700">
             {story.mission}
           </span>
         </div>
 
-        <h2 className="text-2xl sm:text-3xl font-black text-white mb-3 tracking-tight group-hover:text-space-cyan transition-colors duration-150">
+        <h2 className="font-serif text-3xl sm:text-4xl font-normal text-white mb-3 tracking-tight group-hover:text-space-cyan transition-colors duration-150">
           {story.name}
         </h2>
 
-        <p className="text-base sm:text-lg text-slate-300 italic font-medium mb-6 leading-relaxed">
+        <p className="text-base sm:text-lg text-slate-300 italic font-normal mb-8 leading-relaxed">
           &ldquo;{story.hook}&rdquo;
         </p>
       </div>

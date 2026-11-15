@@ -7,24 +7,24 @@ export default function ChapterBlock({ chapter, index, id }) {
   return (
     <article
       id={id || `chapter-${index}`}
-      className="scroll-mt-28 p-6 sm:p-8 rounded-2xl bg-navy-900/90 border border-navy-700/80 shadow-xl transition-all duration-300 hover:border-navy-600 motion-safe:animate-fadeIn"
+      className="scroll-mt-28 p-6 sm:p-10 rounded-2xl bg-navy-900/90 border border-navy-700/80 shadow-xl transition-all duration-300 hover:border-navy-600 motion-safe:animate-fadeIn"
     >
-      <div className="max-w-[65ch]">
-        <div className="flex items-center gap-3 mb-3">
+      <div className="max-w-[65ch] mx-auto">
+        <div className="flex items-center gap-3 mb-4">
           <span className="flex items-center justify-center w-8 h-8 rounded-full bg-cyan-950/80 text-space-cyan font-bold text-sm border border-cyan-800/60 shadow-sm">
             {index + 1}
           </span>
-          <span className="text-xs font-bold tracking-wider uppercase text-slate-400">
+          <span className="text-xs font-semibold tracking-wider uppercase text-slate-400">
             Chapter {index + 1}
           </span>
         </div>
 
-        <h2 className="text-2xl sm:text-3xl font-black text-white mb-4 tracking-tight">
+        <h2 className="font-serif text-3xl sm:text-4xl font-normal text-white mb-4 tracking-tight leading-snug">
           {chapter.title}
         </h2>
 
         {chapter.image && (
-          <figure className="my-5 overflow-hidden rounded-xl bg-navy-950 border border-navy-700">
+          <figure className="my-6 overflow-hidden rounded-xl bg-navy-950 border border-navy-700">
             <img
               src={chapter.image}
               alt={chapter.imageAlt || chapter.title}
@@ -37,7 +37,7 @@ export default function ChapterBlock({ chapter, index, id }) {
           </figure>
         )}
 
-        <p className="text-base sm:text-lg text-slate-200 leading-relaxed font-normal mb-6">
+        <p className="text-base sm:text-lg text-slate-200 leading-relaxed font-normal mb-8">
           {chapter.text}
         </p>
 
